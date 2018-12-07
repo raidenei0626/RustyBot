@@ -16,14 +16,14 @@ client.aliases = new Discord.Collection();
 client.settings = {} = require("./config.js");
 menu = require("./modules/embedMenus")
 require("./modules/functions.js")(client);
-logit = require("./modules/Logger");
+client.logger = require("./modules/Logger");
 
 menu.init()
 
 const init = async () => {
     // Load Commands
     const cmdFiles = await readdir("./commands/");
-    console.log(`Loading a total of ${cmdFiles.length} commands.`);
+    client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
     cmdFiles.forEach(file => {
         if (!file.endsWith(".js")) return;
         const response = client.loadCommand(file);
@@ -32,7 +32,7 @@ const init = async () => {
 
     // Then we load events, which will include our message and ready event.
     const evtFiles = await readdir("./events/");
-    logit(`Loading a total of ${evtFiles.length} events.`); 
+    client.logger.log(`Loading a total of ${evtFiles.length} events.`); 
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
         console.log(`Loading Event: ${eventName}`);
