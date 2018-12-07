@@ -16,12 +16,8 @@ client.aliases = new Discord.Collection();
 client.settings = {} = require("./config.js");
 menu = require("./modules/embedMenus")
 require("./modules/functions.js")(client);
-require("./web/config")(client);
-
-
 
 menu.init()
-
 
 const init = async () => {
     // Load Commands
