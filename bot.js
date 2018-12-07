@@ -6,7 +6,7 @@ var cron = require('node-cron');
 require(`./modules/embeds`)(client)
 
 cron.schedule('* * * * *', () => {
-    client.getStats()
+    // Cron Job
 });
 
 client.commands = new Discord.Collection();
