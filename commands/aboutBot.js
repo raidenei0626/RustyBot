@@ -6,7 +6,7 @@ const Discord = require("discord.js");
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: [],
+    aliases: ["test"],
     permLevel: "User"
 };
 

@@ -21,6 +21,18 @@ client.logger = require("./modules/Logger");
 menu.init()
 
 const init = async () => {
+
+    // Logs Demo
+    client.logger.log("Standard Log Demo")
+    client.logger.warn("Warn Log Demo")
+    client.logger.error("Error Log Demo")
+    client.logger.debug("Debug Log Demo")
+    client.logger.cmd("cmd Log Demo")
+    client.logger.ready("Ready Log Demo")
+    client.logger.loaded("loaded Log Demo")
+
+    console.log("\n\n          ============\n              Logs\n          ============\n")
+
     // Load Commands
     const cmdFiles = await readdir("./commands/");
     client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
@@ -35,7 +47,7 @@ const init = async () => {
     client.logger.log(`Loading a total of ${evtFiles.length} events.`); 
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
-        console.log(`Loading Event: ${eventName}`);
+        client.logger.loaded(`Loading Event: ${eventName}`);
         const event = require(`./events/${file}`);
         client.on(eventName, event.bind(null, client));
     });
