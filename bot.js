@@ -32,7 +32,7 @@ const init = async () => {
 
     // Then we load events, which will include our message and ready event.
     const evtFiles = await readdir("./events/");
-    logit(`Loading a total of ${evtFiles.length} events.`);
+    logit(`Loading a total of ${evtFiles.length} events.`); 
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
         console.log(`Loading Event: ${eventName}`);
