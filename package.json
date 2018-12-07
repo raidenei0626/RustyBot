@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "bot": "node bot.js",
-    "prebot": "git remote set-url origin https://github.com/MattCSmith/zeroBot-v3.0.git && git pull origin master && npm i -s"
+    "prebot": "git remote set-url origin https://github.com/MattCSmith/zeroBot-v3.0.git && git pull origin master && npm i --loglevel silent --silent"
   },
   "author": "",
   "license": "ISC",
