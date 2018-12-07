@@ -4,7 +4,8 @@
   "description": "Discord bot for the ZTM community!",
   "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bot": "node bot.js",
+    "prebot": "git remote set-url origin https://github.com/MattCSmith/zeroBot-v3.0.git && git pull origin master"
   },
   "author": "",
   "license": "ISC",
