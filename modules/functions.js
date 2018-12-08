@@ -80,10 +80,9 @@ module.exports = (client) => {
       }
     };
   
-  
     client.loadCommand = (commandName) => {
       try {
-        console.log(`Loading Command: ${commandName}`);
+        client.logger.loaded(`Loading Command: ${commandName}`);
         const props = require(`../commands/${commandName}`);
         if (props.init) {
           props.init(client);
@@ -91,25 +90,7 @@ module.exports = (client) => {
         client.commands.set(props.help.name, props);
         props.conf.aliases.forEach(alias => {
           client.aliases.set(alias, props.help.name);
-          console.log(props.help.name + "loaded") 
-        });
-        return false;
-      } catch (e) {
-        return `Unable to load command ${commandName}: ${e}`;
-      }
-    };
-  
-    client.loadCommand = (commandName) => {
-      try {
-        console.log(`Loading Command: ${commandName}`);
-        const props = require(`../commands/${commandName}`);
-        if (props.init) {
-          props.init(client);
-        }
-        client.commands.set(props.help.name, props);
-        props.conf.aliases.forEach(alias => {
-          client.aliases.set(alias, props.help.name);
-          console.log(props.help.name + "loaded") 
+          client.logger.loaded("Alias: " + props.help.name + " loaded") 
         });
         return false;
       } catch (e) {
