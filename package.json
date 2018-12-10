@@ -4,7 +4,7 @@
   "description": "Discord bot for the ZTM community!",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js",
+    "start": "nodemon bot.js",
     "bot": "node bot.js",
     "prebot": "echo Checking for updates!! && git remote set-url origin https://github.com/MattCSmith/zeroBot-v3.0.git && echo Updating Packages... && git pull origin master && npm i"
   },
