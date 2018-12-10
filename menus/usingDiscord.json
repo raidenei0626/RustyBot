@@ -1,0 +1,19 @@
+{
+    "name": "usingDiscord",
+    "title": "Using Discord",
+    "color": "#e4a01c",
+    "thumb": "https://cdn4.iconfinder.com/data/icons/game-design-flat-icons-2/512/16_lifebuoy_rescue_game_design_flat_icon-512.png",
+    "desc": "Intro Text Here\n\n",
+    "reactions": ["🔤", "✏", "🎙"],
+    "fields": [
+        ["The Basics", "Getting started with Discord", true],
+        ["Mark Down", "Styling your posts and code", true],
+        ["Voice Chat", "How to use voice chat", true]
+    ], 
+    "options": [
+        ["cmd", "usingdiscord", "user", "basics"],
+        ["cmd", "usingdiscord", "user", "markdown"],
+        ["cmd", "usingdiscord", "user", "voicechat"]
+    ]
+    
+}
