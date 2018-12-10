@@ -1,0 +1,22 @@
+{
+    "name": "Welcome",
+    "title": "Welcome to the Zero to Mastery Discord server!",
+    "color": "#f45c41",
+    "thumb": "https://cdn.discordapp.com/attachments/434387243579342849/434406596047667200/zeroToMasteryIcon.png",
+    "desc": "Welcome to the new and improved Zero to Mastery's Discord Community and we are delighted to have you apart of this amazing community. This community is a valuable resource, especially in your early stages as a developer. Take the opportunity to chat, discuss and ask questions with other members. You will also find lots of interesting articles posted by your fellow students.\n\n **Click the reactions at the bottom of this message, to find out more about this server!**\n\n",
+    "reactions": ["⚠", "❓", "🔗", "🤖", "🛠"],
+    "fields": [
+        ["Rules", "Rules for the server", true],
+        ["Using Discord", "How to use Discord", true],
+        ["Useful Links", "Some handy links", true],
+        ["About zeroBot", "All about the bot", true],
+        ["Group Projects", "Projects information", true]
+    ], 
+    "options": [
+        ["cmd", "rules", "user"],
+        ["cmd", "usingdiscord", "user"],
+        ["cmd", "links", "user"],
+        ["cmd", "about", "user"]
+    ]
+    
+}

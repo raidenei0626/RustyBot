@@ -20,7 +20,7 @@ exports.embed = async (menu, chan) => {
 
 exports.react =(client, reaction, user) => {
     // Resets the reaction, so the user can use it again in the future
-    // reaction.remove(user.id)
+    reaction.remove(user.id)
 
     // Grabs the embed title so we can check which embed the reaction belongs too
     const which = reaction.message.embeds[0].title
