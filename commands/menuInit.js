@@ -18,6 +18,6 @@ exports.help = {
 };
 
 exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
-    if(args[0] === "welcome") menu.embed("Welcome", message.channel)
+    if(args[0] === "welcome") menu.embed("welcome", message.channel)
     if(args[0] === "discord") menu.embed("usingDiscord", message.channel)
 };
