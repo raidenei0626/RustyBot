@@ -84,13 +84,13 @@ exports.run = (client, message, args) => {
 		if (queue.length>0 && isPlaying) {
 			// queue.shift();
 			// playMusic(queue[0], message);
-			message.channel.send("404 command not found")
+			// message.channel.send("skipping current song");
 		} else {
 			// message.channel.send("**:**/ no songs in queue");
-			message.channel.send("404 command not found")
 		}
+		message.channel.send("yet to be implemented")
 	}
-	if (args[0] === "play") {
+	if (args[0] === "play" && args.length>1) {
 		if(!message.member.voiceChannel) return message.reply(":cry: :cry: no one's listening to my music. \n join the voice channel first");
 		console.log('music');
 		args.shift();
@@ -109,6 +109,20 @@ exports.run = (client, message, args) => {
 				message.reply("now playing: **"+id+"**");
 			})
 		}
+	} else {
+		isPlaying = true;
+		voiceChannel = message.member.voiceChannel;
+
+			voiceChannel.join().then(function (connection) {
+
+				stream = "http://stream01.iloveradio.de/iloveradio1.mp3"
+
+				let dispatcher = connection.playStream(stream);
+				dispatcher.on('end', () => {
+						client.logger.debug("buh bye");
+						voiceChannel.leave();
+				});
+			});
 	}
 
 };
