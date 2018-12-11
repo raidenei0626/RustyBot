@@ -6,30 +6,6 @@ const MongoClient = require('mongodb').MongoClient
 
 
 module.exports = (client) => {
-
-
-
-
-    app.get('/solutions', function (req, res) {
-
-        MongoClient.connect(client.settings.mlabs, function (err, db) {
-            if (err) throw err;
-            var dbo = db.db("zeroBot");
-            dbo.collection("users").find({ dayNumber: req.query.day }).toArray(function (err, result) {
-                if (err) throw err;
-                res.json(result);
-                db.close();
-            });
-        });
-    });
-
-
-
-
-
-
-
-
     app.listen(port, function () {
         client.logger.loaded(`ZeroWeb is running on port: ${port}`);
     })
@@ -37,12 +13,6 @@ module.exports = (client) => {
     // Default View
     app.get('/', function (req, res) {
         res.send('API ZeroBot V3');
-    })
-
-    // Test View
-    app.get('/test', function (req, res) {
-        res.send('TEST VIEW');
-        console.log(Object.keys(client.userDB))
     })
 
     // Buddy View
