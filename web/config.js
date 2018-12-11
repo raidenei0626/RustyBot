@@ -11,9 +11,8 @@ module.exports = (client) => {
 
 
     app.get('/solutions', function (req, res) {
-        console.log(req.query.day);
 
-        MongoClient.connect(client.settings.mlabs, { useNewUrlParser: true }, function (err, db) {
+        MongoClient.connect(client.settings.mlabs, function (err, db) {
             if (err) throw err;
             var dbo = db.db("zeroBot");
             dbo.collection("users").find({ dayNumber: req.query.day }).toArray(function (err, result) {
