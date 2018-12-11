@@ -15,11 +15,11 @@ module.exports = (client) => {
         res.send('API ZeroBot V3');
     })
 
-        // Test View
-        app.get('/test', function (req, res) {
-            res.send('TEST VIEW');
-            console.log(Object.keys(client.userDB))
-        })
+    // Test View
+    app.get('/test', function (req, res) {
+        res.send('TEST VIEW');
+        console.log(Object.keys(client.userDB))
+    })
 
     // Buddy View
     app.get('/buddy', function (req, res) {
@@ -28,6 +28,7 @@ module.exports = (client) => {
                 if (err) {
                     res.send('error occured')
                 } else {
+                    console.log("BUDDY LOADING")
                     res.json(buddy);
                 }
             });
@@ -45,16 +46,16 @@ module.exports = (client) => {
             });
     });
 
-    app.get('/users/:name', function(req, res) {
+    app.get('/users/:name', function (req, res) {
         client.userDB.find({
-          name: req.params.name
-          })
-          .exec(function(err, name) {
-            if(err) {
-              res.send('error occured')
-            } else {
-              res.json(name);
-            }
-          });
-      });
+            name: req.params.name
+        })
+            .exec(function (err, name) {
+                if (err) {
+                    res.send('error occured')
+                } else {
+                    res.json(name);
+                }
+            });
+    });
 }
