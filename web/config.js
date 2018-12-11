@@ -12,15 +12,8 @@ module.exports = (client) => {
 
     // Default View
     app.get('/', function (req, res) {
-        // res.send('API ZeroBot V3');
-client.userDB.findOne({name:"Mattchow"})
-        .exec(function (err, u) {
-            if (err) {
-                res.send('error occured')
-            } else {
-                res.json(u);
-            }
-        });
+        res.send('API ZeroBot V3');
+        console.log(Object.keys(client.userDB))
     })
 
     // Buddy View
