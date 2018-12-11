@@ -16,6 +16,7 @@ client.aliases = new Discord.Collection();
 client.settings = {} = require("./config.js");
 menu = require("./modules/embedMenus")
 require("./modules/functions.js")(client);
+require("./modules/databases.js")(client)
 client.logger = require("./modules/Logger");
 
 menu.init()
@@ -60,6 +61,7 @@ const init = async () => {
     }
 
     client.login(client.settings.token);
+    require("./web/config")(client)
     // client.updateStats()
 }
 
