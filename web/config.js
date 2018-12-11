@@ -13,8 +13,13 @@ module.exports = (client) => {
     // Default View
     app.get('/', function (req, res) {
         res.send('API ZeroBot V3');
-        console.log(Object.keys(client.userDB))
     })
+
+        // Test View
+        app.get('/test', function (req, res) {
+            res.send('TEST VIEW');
+            console.log(Object.keys(client.userDB))
+        })
 
     // Buddy View
     app.get('/buddy', function (req, res) {
