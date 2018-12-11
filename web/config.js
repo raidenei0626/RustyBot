@@ -6,6 +6,31 @@ const MongoClient = require('mongodb').MongoClient
 
 
 module.exports = (client) => {
+
+
+
+
+    app.get('/solutions', function (req, res) {
+        console.log(req.query.day);
+
+        MongoClient.connect(client.settings.mlabs, { useNewUrlParser: true }, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("zeroBot");
+            dbo.collection("users").find({ dayNumber: req.query.day }).toArray(function (err, result) {
+                if (err) throw err;
+                res.json(result);
+                db.close();
+            });
+        });
+    });
+
+
+
+
+
+
+
+
     app.listen(port, function () {
         client.logger.loaded(`ZeroWeb is running on port: ${port}`);
     })
