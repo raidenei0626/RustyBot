@@ -17,7 +17,7 @@ module.exports = (client) => {
 
     // Buddy View
     app.get('/buddy', function (req, res) {
-        client.buddy.find({})
+        client.buddyDB.find({})
             .exec(function (err, buddy) {
                 if (err) {
                     res.send('error occured')
@@ -39,7 +39,7 @@ module.exports = (client) => {
             });
     });
 
-    app.get('/user/:name', function(req, res) {
+    app.get('/users/:name', function(req, res) {
         client.userDB.find({
           name: req.params.name
           })
@@ -51,10 +51,4 @@ module.exports = (client) => {
             }
           });
       });
-
-      
 }
-
-
-
-  
