@@ -4,6 +4,7 @@ const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const cron = require('node-cron');
 require(`./modules/embeds`)(client)
+client.moment = require("moment");
 
 cron.schedule('* * * * *', () => {
     // Cron Job

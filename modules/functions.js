@@ -30,7 +30,7 @@ module.exports = (client) => {
         userr.stats = { mCount: userr.stats.mCount + mCount, cmd: userr.stats.cmd + cmd }
         userr.save().catch(err => console.log(err))
       }
-      console.log(userr)
+      // console.log(userr)
     })
   }
 
