@@ -13,6 +13,7 @@ module.exports = async (client, message) => {
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.
   if (message.content.indexOf(client.settings.general.prefix) !== 0) {
+    client.updateUser(message, "mCount")
     return;
   }
 
@@ -57,6 +58,7 @@ module.exports = async (client, message) => {
     message.author.permLevel = level;
     
     // If the command exists, **AND** the user has permission, run it.
+    client.updateUser(message, "cmd")
     cmd.run(client, message, args, level);
 
 
