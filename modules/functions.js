@@ -28,6 +28,7 @@ module.exports = (client) => {
         newUser.save().catch(err => console.log(err))
       } else {
         userr.stats = { mCount: userr.stats.mCount + mCount, cmd: userr.stats.cmd + cmd }
+        userr.avatar = "TEst"
         userr.save().catch(err => console.log(err))
       }
       // console.log(userr)

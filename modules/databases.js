@@ -19,6 +19,7 @@ module.exports = (client) => {
         rank: String,
         created: String,
         joined: String,
-        stats: Object
+        stats: Object,
+        avatar: String
     }));
 }

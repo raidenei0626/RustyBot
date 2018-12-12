@@ -48,8 +48,18 @@ module.exports = (client) => {
                 if (err) {
                     res.send('error occured')
                 } else {
-                    res.json(name);
+                    let user = client.users.find(user => user.username.toLowerCase() == req.params.name.toLowerCase());
+                    name[0].avatar = client.users.get(user.id).avatarURL
+                    res.json( name[0]);
                 }
             });
+    });
+
+    app.get('/avatar/:user', function (req, res) {
+        
+        let user = client.users.find(user => user.username.toLowerCase() == req.params.user.toLowerCase());
+    
+        console.log(req.params.user, user)
+        res.send(client.users.get(user.id).avatarURL)
     });
 }
