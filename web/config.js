@@ -49,7 +49,8 @@ module.exports = (client) => {
                     res.send('error occured')
                 } else {
                     let user = client.users.find(user => user.username.toLowerCase() == req.params.name.toLowerCase());
-                    name[0].avatar = client.users.get(user.id).avatarURL
+                    
+                    if(user !== null) name[0].avatar = client.users.get(user.id).avatarURL
                     res.json( name[0]);
                 }
             });
