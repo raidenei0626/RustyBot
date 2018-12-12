@@ -18,7 +18,7 @@ TD.addRule('mark', {
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: [],
+    aliases: ['m', 'moz', 'docs'],
     permLevel: "User"
 };
 
