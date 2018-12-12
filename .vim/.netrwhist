@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/srv/daemon-data/69c3daff-f31a-44d2-a01c-c838c9243a3f/logs'
-let g:netrw_dirhist_2='/srv/daemon-data/69c3daff-f31a-44d2-a01c-c838c9243a3f'
-let g:netrw_dirhist_3='/srv/daemon-data/69c3daff-f31a-44d2-a01c-c838c9243a3f/logs'
