@@ -35,7 +35,14 @@ module.exports = (client) => {
                 if (err) {
                     res.send('error occured')
                 } else {
-                    res.json(user);
+                    let data = []
+                    user.forEach(u => {
+                        let user = client.users.find(user => user.username.toLowerCase() == u.name.toLowerCase());
+                        if(u.name.includes("#")) return //Incase names still have the discriminator
+                        u.avatar = client.users.get(user.id).avatarURL
+                        data.push(u)
+                    });
+                    res.json(data);
                 }
             });
     });
@@ -49,9 +56,9 @@ module.exports = (client) => {
                     res.send('error occured')
                 } else {
                     let user = client.users.find(user => user.username.toLowerCase() == req.params.name.toLowerCase());
-                    
-                    if(user !== null) name[0].avatar = client.users.get(user.id).avatarURL
-                    res.json( name[0]);
+
+                    if (user !== null) name[0].avatar = client.users.get(user.id).avatarURL
+                    res.json(name[0]);
                 }
             });
     });
