@@ -109,7 +109,8 @@ exports.run = (client, message, args) => {
 				message.reply("now playing: **"+id+"**");
 			})
 		}
-	} else {
+	} else if (args[0] === "play") {
+		console.log('playing -> I ♥ RADIO');
 		isPlaying = true;
 		voiceChannel = message.member.voiceChannel;
 
@@ -118,11 +119,22 @@ exports.run = (client, message, args) => {
 				stream = "http://stream01.iloveradio.de/iloveradio1.mp3"
 
 				let dispatcher = connection.playStream(stream);
-				dispatcher.on('end', () => {
-						client.logger.debug("buh bye");
-						voiceChannel.leave();
-				});
+
 			});
+	}
+
+	if (args[0] === "radio") {
+	    console.log('playing -> I ♥ MASHUP');
+	    isPlaying = true;
+	    voiceChannel = message.member.voiceChannel;
+
+	        voiceChannel.join().then(function (connection) {
+
+	            stream = "http://stream01.iloveradio.de/iloveradio5.mp3"
+
+	            let dispatcher = connection.playStream(stream);
+
+	        });
 	}
 
 };
