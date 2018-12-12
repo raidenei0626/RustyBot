@@ -19,8 +19,8 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
     let name;
     let member = message.mentions.members.first() || message.guild.members.get(args[0]);
 
-    if (!member) name = message.author.username + "#" + message.author.discriminator
-    else name = member.user.username + "#" + member.user.discriminator;
+    if (!member) name = message.author.username
+    else name = member.user.username;
 
     client.userDB.findOne({
         name: name
