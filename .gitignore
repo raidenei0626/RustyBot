@@ -1,2 +1,7 @@
 tokens.json
 node_modules/
+.cache
+.config
+.npm
+.vim
+.viminfo
