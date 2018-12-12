@@ -15,6 +15,10 @@ module.exports = (client) => {
     // User Schmea
     client.userDB = mongoose.model('user', new mongoose.Schema({
         name: String,
+        uuid: Number, 
         rank: String,
+        created: String,
+        joined: String,
+        stats: Object
     }));
 }
