@@ -71,8 +71,8 @@ module.exports = (client) => {
         console.log(req.params.user, user)
         res.send(client.users.get(user.id).avatarURL)
     });
-
-    app.get('/meebot/fresh', async function (req, res) {
+    
+    app.get('/meebot', async function (req, res) {
         let page = 0
         let data = []
 
@@ -86,11 +86,7 @@ module.exports = (client) => {
                 );
             page++
         }
-        res.send(data)
-    })
-
-    app.get('/meebot', function (req, res) {
-        const data = require('./mee/data.json')
+        
         let total = 0
         let totUsers;
         let range = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -119,7 +115,8 @@ module.exports = (client) => {
             msg100to1000: range[4],
             msg1000to2000: range[5],
             msg2000to3000: range[6],
-            msg3000to4000: range[7]
+            msg3000to4000: range[7],
+            members: data
         });
     })
 }
