@@ -31,16 +31,6 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
         });
     }else{
 
-            let name = message.author.username
-            let rank = "test"
-    
-            client.userDB.create({ name, rank}, function (err, newData) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    client.logger.debug("ADDED TO DB")
-                }
-            });
         
     }
 }
