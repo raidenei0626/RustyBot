@@ -3,7 +3,7 @@ module.exports = (client) => {
   // Update User Stats Function
   client.updateUser = (message, stat) => {
     // console.log(message)
-    const name = message.author.username + "#" + message.author.discriminator;
+    const name = message.author.username;
     const uuid = message.author.id;
 
     let JoinedZtm = message.guild.members.get(uuid).joinedAt
@@ -28,7 +28,7 @@ module.exports = (client) => {
         newUser.save().catch(err => console.log(err))
       } else {
         userr.stats = { mCount: userr.stats.mCount + mCount, cmd: userr.stats.cmd + cmd }
-        userr.avatar = "TEst"
+        userr.avatar = ""
         userr.save().catch(err => console.log(err))
       }
       // console.log(userr)
@@ -56,6 +56,7 @@ module.exports = (client) => {
   client.isSkipped = false;
   // client.skipperUser = null;
   client.volume = 6;
+
   /*
      PERMISSION LEVEL FUNCTION
      This is a very basic permission system for commands which uses "levels"
