@@ -1,0 +1,21 @@
+{
+    "name": "Music Info",
+    "title": "Music Bot Controller",
+    "color": "#f45c41",
+    "thumb": "https://cdn.discordapp.com/attachments/434387243579342849/434406596047667200/zeroToMasteryIcon.png",
+    "desc": "**Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum**\n\n",
+    "reactions": ["🎵", "👻", "🔉", "🔊"],
+    "fields": [
+        ["Pause/Resume", "Pause/Resume current song", true],
+        ["Skip", "Skip current song", true],
+        ["Volume-=5", "Decreases volume by 5", true],
+        ["Volume+=5", "Increases volume by 5", true]
+    ],
+    "options": [
+        ["cmd", "minfo", "user", "pr"],
+        ["cmd", "minfo", "user", "skip"],
+        ["cmd", "minfo", "user", "vdecr"],
+        ["cmd", "minfo", "user", "vincr"]
+    ]
+
+}

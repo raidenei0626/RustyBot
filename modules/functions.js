@@ -51,6 +51,11 @@ module.exports = (client) => {
     return d.getDate();
   }
 
+  // musical functions starts here dodooodddoodoooododoo
+
+  client.isSkipped = false;
+  // client.skipperUser = null;
+  client.volume = 6;
   /*
      PERMISSION LEVEL FUNCTION
      This is a very basic permission system for commands which uses "levels"
@@ -161,9 +166,9 @@ module.exports = (client) => {
   // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this
   // later, this conflicts with native code. Also, if some other lib you use does
   // this, a conflict also occurs. KNOWING THIS however, the following 2 methods
-  // are, we feel, very useful in code. 
+  // are, we feel, very useful in code.
 
-  // <String>.toPropercase() returns a proper-cased string such as: 
+  // <String>.toPropercase() returns a proper-cased string such as:
   // "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
   String.prototype.toProperCase = function () {
     return this.replace(/([^\W_]+[^\s-]*) */g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
@@ -182,7 +187,7 @@ module.exports = (client) => {
   process.on("uncaughtException", (err) => {
     const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
     console.log(`Uncaught Exception: ${errorMsg}`);
-    // Always best practice to let the code crash on uncaught exceptions. 
+    // Always best practice to let the code crash on uncaught exceptions.
     // Because you should be catching them anyway.
     process.exit(1);
   });
