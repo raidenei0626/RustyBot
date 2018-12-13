@@ -23,16 +23,14 @@ exports.run = (client, message, args, level) => {
     let emHelp = new Discord.RichEmbed()
     .setAuthor(`Command Help List`)
     .setColor("BLUE")
-    .setDescription(`${message.settings.prefix}help <commandname> for details`)
+    .setDescription(`${client.settings.general.prefix}help <commandname> for details`)
 
     const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
     sorted.forEach( c => {
     
-      emHelp.addField(`${message.settings.prefix}${c.help.name}`, `${c.help.description}`)
+      emHelp.addField(`${client.settings.general.prefix}${c.help.name}`, `${c.help.description}`)
     
     });
-
-
         message.channel.send({embed: emHelp})
     //message.channel.send(output, {code: "asciidoc", split: { char: "\u200b" }});
   } else {
@@ -43,10 +41,10 @@ exports.run = (client, message, args, level) => {
       if (level < client.levelCache[command.conf.permLevel]) return;
 
       let emIndCmd = new Discord.RichEmbed()
-        .setAuthor(`${message.settings.prefix}${command.help.name} Information!`)
+        .setAuthor(`${client.settings.general.prefix}${command.help.name} Information!`)
         .setColor("BLUE")
         .setDescription(`${command.help.description}`)
-        .addField(":white_check_mark: **Usage:**", message.settings.prefix + command.help.usage, true)
+        .addField(":white_check_mark: **Usage:**", client.settings.general.prefix + command.help.usage, true)
         .addField(":unicorn:  **Aliases**", (command.conf.aliases.join(", ") ? command.conf.aliases.join(", ") : "N/A"), true)
 
       message.channel.send({embed: emIndCmd})
