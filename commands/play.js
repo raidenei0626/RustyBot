@@ -79,10 +79,10 @@ exports.run = (client, message, args) => {
 
 	// Update the stats embed
     const queueDispUpdate = async () => {
-        const chan = client.channels.get("521239909504253952");
+        const chan = client.channels.get("523106109297524738");
         let stats;
 
-        await chan.fetchMessages({ around: "522871508314357781", limit: 1 })
+        await chan.fetchMessages({ around: "523106290944311297", limit: 1 })
             .then(messages => {
                 const fetchedMsg = messages.first(); // messages is a collection!)
 
