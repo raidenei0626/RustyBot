@@ -44,6 +44,11 @@ exports.run = (client, message, args) => {
 
 				dispatcher = connection.playStream(stream);
 				dispatcher.setVolume(client.volume/10);
+
+				dispatcher.on('error', (e) => {
+				    console.error("error " + e);
+				});
+
 				dispatcher.on('end', () => {
 					// console.log("queue", queue);
 					queue.shift();
