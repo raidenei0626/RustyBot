@@ -35,7 +35,7 @@ exports.run = (client, message, args) => {
 		voiceChannel.join()
 		  .then(connection => {
 		    const stream = ytdl('https://www.youtube.com/watch?v=jecQcgbyetw', { filter : 'audioonly' });
-		    const dispatcher = connection.playArbitraryInput(stream, streamOptions);
+		    const dispatcher = connection.playConvertedStream(stream, streamOptions);
 		  })
 		  .catch(console.error);
 
