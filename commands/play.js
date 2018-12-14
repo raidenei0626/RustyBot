@@ -42,7 +42,7 @@ exports.run = (client, message, args) => {
 					// quality: 92   //--------> filter for live streams
 				});
 
-				dispatcher = connection.play(stream);
+				dispatcher = connection.playOpusStream(stream);
 				dispatcher.setVolume(client.volume/10);
 
 				dispatcher.on('error', (e) => {
