@@ -30,42 +30,51 @@ exports.run = (client, message, args) => {
 		console.log("vc type", typeof(voiceChannel));
 		// console.log(voiceChannel);
 
-			voiceChannel.join().then(connection => {
-				console.log("idddddddddd", id)
-				client.logger.debug("id type" +  typeof(id))
-				console.log('video url', "https://www.youtube.com/watch?v="+id);
+		// Play streams using ytdl-core
+		const streamOptions = { seek: 0, volume: 1 };
+		voiceChannel.join()
+		  .then(connection => {
+		    const stream = ytdl('https://www.youtube.com/watch?v=jecQcgbyetw', { filter : 'audioonly' });
+		    const dispatcher = connection.playStream(stream, streamOptions);
+		  })
+		  .catch(console.error);
 
-				let completeUrl = "https://www.youtube.com/watch?v=" + id;
-				stream = ytdl(completeUrl, {
-					filter: "audioonly"
-					// quality: 92   //--------> filter for live streams
-				});
-
-				dispatcher = connection.playStream(stream);
-				dispatcher.setVolume(client.volume/10);
-
-				dispatcher.on('error', (e) => {
-				    console.error("error " + e);
-				});
-
-				dispatcher.on('end', () => {
-					// console.log("queue", queue);
-					queue.shift();
-					// console.log("queue after", queue);
-					queueDispUpdate()
-					if (queue.length === 0) {
-						queue = [];
-						isPlaying = false;
-						console.log('buh bye');
-						voiceChannel.leave();
-					} else {
-						console.log(queue);
-						console.log('else of disp.end');
-						playMusic(queue[0], message)
-					}
-				});
-			})
-			.catch(console.error);
+			// voiceChannel.join().then(connection => {
+			// 	console.log("idddddddddd", id)
+			// 	client.logger.debug("id type" +  typeof(id))
+			// 	console.log('video url', "https://www.youtube.com/watch?v="+id);
+			//
+			// 	let completeUrl = "https://www.youtube.com/watch?v=" + id;
+			// 	stream = ytdl(completeUrl, {
+			// 		filter: "audioonly"
+			// 		// quality: 92   //--------> filter for live streams
+			// 	});
+			//
+			// 	dispatcher = connection.playStream(stream);
+			// 	dispatcher.setVolume(client.volume/10);
+			//
+			// 	dispatcher.on('error', (e) => {
+			// 	    console.error("error " + e);
+			// 	});
+			//
+			// 	dispatcher.on('end', () => {
+			// 		// console.log("queue", queue);
+			// 		queue.shift();
+			// 		// console.log("queue after", queue);
+			// 		queueDispUpdate()
+			// 		if (queue.length === 0) {
+			// 			queue = [];
+			// 			isPlaying = false;
+			// 			console.log('buh bye');
+			// 			voiceChannel.leave();
+			// 		} else {
+			// 			console.log(queue);
+			// 			console.log('else of disp.end');
+			// 			playMusic(queue[0], message)
+			// 		}
+			// 	});
+			// })
+			// .catch(console.error);
 	}
 
 	const getId = (str, cb) => {
