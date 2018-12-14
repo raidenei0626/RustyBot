@@ -18,6 +18,7 @@ exports.run = (client, message, args) => {
 	client.logger = require("../modules/Logger");
 
 	const addToQueue = (strID) => {
+		queueDispUpdate()
 		queue.push(strID);
 	}
 
@@ -51,6 +52,7 @@ exports.run = (client, message, args) => {
 						queue = [];
 						isPlaying = false;
 						console.log('buh bye');
+						voiceChannel.leave();
 					} else {
 						console.log(queue);
 						console.log('else of disp.end');
@@ -98,7 +100,7 @@ exports.run = (client, message, args) => {
 
                 queue.forEach(rs => {
 
-                    newEmbed.addField(rs[0], `[Songs Queue](${rs[1]})`, true)
+                    newEmbed.addField(rs, `[${rs}](https://www.youtube.com/watch?v=${rs})`, true)
                 });
 
                 fetchedMsg.edit(newEmbed);
@@ -111,7 +113,7 @@ exports.run = (client, message, args) => {
 	if (client.isSkipped) {
 		client.isSkipped = false;
 		dispatcher.end();
-		if (queue.length > 1) {
+		if (queue.length > 0) {
 			console.log('hola');
 		} else {
 			queue = [];
@@ -151,6 +153,7 @@ exports.run = (client, message, args) => {
 			isPlaying = false;
 			queue = [];
 			message.channel.send("**DJ {zeroBot}** Signing Off :microphone:");
+			queueDispUpdate()
 			message.member.voiceChannel.leave();
 		}else {
 			message.channel.send(":thinking: i'm not in the voice Channel");
