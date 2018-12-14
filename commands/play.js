@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
 
 	const playMusic = (id, message) => {
 		// voiceChannel = message.member.voiceChannel;
-		voiceChannel = client.channels.get('521241596914565131');
+		voiceChannel = client.channels.get('521433206306766848');
 		queueDispUpdate();
 
 		console.log("vc type", typeof(voiceChannel));
@@ -37,8 +37,9 @@ exports.run = (client, message, args) => {
 
 				let completeUrl = "https://www.youtube.com/watch?v=" + id;
 				stream = ytdl(completeUrl, {
-					filter: "audioonly"
-					// quality: 92
+					// filter: "audioonly",
+					highWaterMark: 1024 * 1024 * 10 // 10 megabytes
+					// quality: 92   //--------> filter for live streams
 				});
 
 				dispatcher = connection.playStream(stream);
@@ -90,11 +91,6 @@ exports.run = (client, message, args) => {
                 const newEmbed = new Discord.RichEmbed()
                     .setTitle("zeroBot Controller")
                     .setDescription(``)
-                    .addField(`🎵`, "Pause/Resume Volume", true)
-                    .addField(`👻`, "Skip Current Song", true)
-                    .addField(`🔉`, "Volume -2", true)
-					.addField(`🔊`, "Volume +2", true)
-                    .addBlankField()
 					.addField(`:loudspeaker: Current Volume:`, `${(client.volume/12)*100}%`, true)
                     .addField(" :musical_note: Songs Queue :musical_note: ", "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
 
@@ -174,7 +170,7 @@ exports.run = (client, message, args) => {
 		} else {
 			isPlaying = true;
 			getId(args, function(id) {
-				queue.push("placeholder");
+				queue.push(id);
 				playMusic(id, message);
 				message.reply(`:musical_note: :musical_note: <${args}> :musical_note: :musical_note:`);
 				message.reply("now playing: **"+id+"**");

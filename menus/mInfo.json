@@ -8,8 +8,8 @@
     "fields": [
         ["Pause/Resume", "Pause/Resume current song", true],
         ["Skip", "Skip current song", true],
-        ["Volume-=5", "Decreases volume by 5", true],
-        ["Volume+=5", "Increases volume by 5", true]
+        ["Volume--", "Decreases volume", true],
+        ["Volume++", "Increases volume", true]
     ],
     "options": [
         ["cmd", "minfo", "user", "pr"],
