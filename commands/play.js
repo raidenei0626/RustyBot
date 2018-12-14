@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
 
 	const playMusic = (id, message) => {
 		// voiceChannel = message.member.voiceChannel;
-		voiceChannel = client.channels.get('447279735198973963');
+		voiceChannel = client.channels.get('521433206306766848');
 		queueDispUpdate();
 
 		console.log("vc type", typeof(voiceChannel));

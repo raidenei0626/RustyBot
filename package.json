@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon bot.js",
     "bot": "node bot.js",
-    "prebot": "echo Checking for updates!! && git remote set-url origin https://github.com/MattCSmith/zeroBot-v3.0.git && echo Updating Packages... && git pull origin master && npm i"
+    "prebot": "git reset --hard  && git pull origin master && npm i"
   },
   "author": "",
   "license": "ISC",
