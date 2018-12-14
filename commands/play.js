@@ -30,19 +30,18 @@ exports.run = (client, message, args) => {
 		console.log("vc type", typeof(voiceChannel));
 		// console.log(voiceChannel);
 
-			voiceChannel.join().then(function (connection) {
+			voiceChannel.join().then(connection => {
 				console.log("idddddddddd", id)
 				client.logger.debug("id type" +  typeof(id))
 				console.log('video url', "https://www.youtube.com/watch?v="+id);
 
 				let completeUrl = "https://www.youtube.com/watch?v=" + id;
 				stream = ytdl(completeUrl, {
-					quality: "lowest",
 					filter: "audioonly"
 					// quality: 92   //--------> filter for live streams
 				});
 
-				dispatcher = connection.playOpusStream(stream);
+				dispatcher = connection.playStream(stream);
 				dispatcher.setVolume(client.volume/10);
 
 				dispatcher.on('error', (e) => {
@@ -65,7 +64,8 @@ exports.run = (client, message, args) => {
 						playMusic(queue[0], message)
 					}
 				});
-			});
+			})
+			.catch(console.error);
 	}
 
 	const getId = (str, cb) => {
