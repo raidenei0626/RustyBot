@@ -3,6 +3,7 @@ const ytdl = require("ytdl-core");
 const request = require("request");
 const fs = require('fs');
 const path = require("path");
+const ytSearch = require( 'yt-search' )
 let config = JSON.parse(fs.readFileSync(path.resolve(__dirname + "/../tokens.json"), 'utf-8'));
 
 
@@ -24,57 +25,57 @@ exports.run = (client, message, args) => {
 
 	const playMusic = (id, message) => {
 		// voiceChannel = message.member.voiceChannel;
-		voiceChannel = client.channels.get('521433206306766848');
+		voiceChannel = client.channels.get('447279735198973963');
 		queueDispUpdate();
 
 		console.log("vc type", typeof(voiceChannel));
 		// console.log(voiceChannel);
 
 		// Play streams using ytdl-core
-		const streamOptions = { seek: 0, volume: 1 };
-		voiceChannel.join()
-		  .then(connection => {
-		    const stream = ytdl('https://www.youtube.com/watch?v=jecQcgbyetw', { filter : 'audioonly' });
-		    const dispatcher = connection.playStream(stream, streamOptions);
-		  })
-		  .catch(console.error);
+		// const streamOptions = { seek: 0, volume: 1 };
+		// voiceChannel.join()
+		//   .then(connection => {
+		//     const stream = ytdl('https://www.youtube.com/watch?v=jecQcgbyetw', { filter : 'audioonly' });
+		//     const dispatcher = connection.playStream(stream, streamOptions);
+		//   })
+		//   .catch(console.error);
 
-			// voiceChannel.join().then(connection => {
-			// 	console.log("idddddddddd", id)
-			// 	client.logger.debug("id type" +  typeof(id))
-			// 	console.log('video url', "https://www.youtube.com/watch?v="+id);
-			//
-			// 	let completeUrl = "https://www.youtube.com/watch?v=" + id;
-			// 	stream = ytdl(completeUrl, {
-			// 		filter: "audioonly"
-			// 		// quality: 92   //--------> filter for live streams
-			// 	});
-			//
-			// 	dispatcher = connection.playStream(stream);
-			// 	dispatcher.setVolume(client.volume/10);
-			//
-			// 	dispatcher.on('error', (e) => {
-			// 	    console.error("error " + e);
-			// 	});
-			//
-			// 	dispatcher.on('end', () => {
-			// 		// console.log("queue", queue);
-			// 		queue.shift();
-			// 		// console.log("queue after", queue);
-			// 		queueDispUpdate()
-			// 		if (queue.length === 0) {
-			// 			queue = [];
-			// 			isPlaying = false;
-			// 			console.log('buh bye');
-			// 			voiceChannel.leave();
-			// 		} else {
-			// 			console.log(queue);
-			// 			console.log('else of disp.end');
-			// 			playMusic(queue[0], message)
-			// 		}
-			// 	});
-			// })
-			// .catch(console.error);
+		voiceChannel.join().then(connection => {
+			console.log("idddddddddd", id)
+			client.logger.debug("id type" +  typeof(id))
+			console.log('video url', "https://www.youtube.com/watch?v="+id);
+
+			let completeUrl = "https://www.youtube.com/watch?v=" + id;
+			stream = ytdl(completeUrl, {
+				filter: "audioonly"
+				// quality: 92   //--------> filter for live streams
+			});
+
+			dispatcher = connection.playStream(stream);
+			dispatcher.setVolume(client.volume/10);
+
+			dispatcher.on('error', (e) => {
+			    console.error("error " + e);
+			});
+
+			dispatcher.on('end', () => {
+				// console.log("queue", queue);
+				queue.shift();
+				// console.log("queue after", queue);
+				queueDispUpdate()
+				if (queue.length === 0) {
+					queue = [];
+					isPlaying = false;
+					console.log('buh bye');
+					voiceChannel.leave();
+				} else {
+					console.log(queue);
+					console.log('else of disp.end');
+					playMusic(queue[0], message)
+				}
+			});
+		})
+		.catch(console.error);
 	}
 
 	const getId = (str, cb) => {
@@ -85,11 +86,27 @@ exports.run = (client, message, args) => {
 
 	//youtube-api
 	const searchVideo = (query, callback) => {
-		request("https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURIComponent(query) + "&key=" + config.yKey.toString(), function(error, response, body) {
-			let json = JSON.parse(body);
-			console.log(json.items[0].id)
-			callback(json.items[0].id.videoId);
-		})
+		// request("https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURIComponent(query) + "&key=" + config.yKey.toString(), function(error, response, body) {
+		// 	let json = JSON.parse(body);
+		// 	console.log(json.items[0].id)
+		// 	callback(json.items[0].id.videoId);
+		// })
+
+
+
+		ytSearch( query, function ( err, r ) {
+		  if ( err ) throw err
+
+		  const videos = r.videos
+		  const playlists = r.playlists
+		  const accounts = r.accounts
+
+		  const firstResult = videos[ 0 ]
+		  	console.log(videos[0].videoId)
+  			callback(videos[0].videoId);
+
+		  // console.log( firstResult )
+		} )
 	}
 
 	// Update the stats embed
