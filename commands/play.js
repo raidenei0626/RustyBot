@@ -29,16 +29,6 @@ exports.run = (client, message, args) => {
 		queueDispUpdate();
 
 		console.log("vc type", typeof(voiceChannel));
-		// console.log(voiceChannel);
-
-		// Play streams using ytdl-core
-		// const streamOptions = { seek: 0, volume: 1 };
-		// voiceChannel.join()
-		//   .then(connection => {
-		//     const stream = ytdl('https://www.youtube.com/watch?v=jecQcgbyetw', { filter : 'audioonly' });
-		//     const dispatcher = connection.playStream(stream, streamOptions);
-		//   })
-		//   .catch(console.error);
 
 		voiceChannel.join().then(connection => {
 			console.log("idddddddddd", id)
@@ -47,7 +37,8 @@ exports.run = (client, message, args) => {
 
 			let completeUrl = "https://www.youtube.com/watch?v=" + id;
 			stream = ytdl(completeUrl, {
-				filter: "audioonly"
+				// filter: "audioonly"
+				quality: 160
 				// quality: 92   //--------> filter for live streams
 			});
 
