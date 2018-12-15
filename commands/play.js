@@ -44,7 +44,7 @@ exports.run = (client, message, args) => {
 				dispatcher = await connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
 				dispatcher.setVolume(client.volume/10);
 
-				stream.on('progress', (d, total, length) => {
+				dispatcher.on('progress', (d, total, length) => {
 		          console.log('progress', total / length);
 		        });
 
