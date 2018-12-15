@@ -30,41 +30,50 @@ exports.run = (client, message, args) => {
 
 		console.log("vc type", typeof(voiceChannel));
 
-		voiceChannel.join().then(connection => {
-			console.log("idddddddddd", id)
-			client.logger.debug("id type" +  typeof(id))
-			console.log('video url', "https://www.youtube.com/watch?v="+id);
+		voiceChannel.setBitrate(48)
+		  .then(vc => {
 
-			let completeUrl = "https://www.youtube.com/watch?v=" + id;
-			stream = ytdl(completeUrl, {
-				filter: "audioonly"
+
+			vc.join().then(connection => {
+				console.log("idddddddddd", id)
+				client.logger.debug("id type" +  typeof(id))
+				console.log('video url', "https://www.youtube.com/watch?v="+id);
+
+				let completeUrl = "https://www.youtube.com/watch?v=" + id;
+				stream = ytdl(completeUrl, {
+					filter: "audioonly"
+				});
+
+				dispatcher = connection.playStream(stream);
+				dispatcher.setVolume(client.volume/10);
+
+				stream.on('progress', (d, total, length) => {
+		          console.log('progress', total / length);
+		        });
+
+				dispatcher.on('end', () => {
+					// console.log("queue", queue);
+					queue.shift();
+					// console.log("queue after", queue);
+					queueDispUpdate()
+					if (queue.length === 0) {
+						queue = [];
+						isPlaying = false;
+						console.log('buh bye');
+						vc.leave();
+					} else {
+						console.log(queue);
+						console.log('else of disp.end');
+						playMusic(queue[0], message)
+					}
+				});
 			});
 
-			dispatcher = connection.playStream(stream);
-			dispatcher.setVolume(client.volume/10);
-
-			stream.on('progress', (d, total, length) => {
-	          console.log('progress', total / length);
-	        });
-
-			dispatcher.on('end', () => {
-				// console.log("queue", queue);
-				queue.shift();
-				// console.log("queue after", queue);
-				queueDispUpdate()
-				if (queue.length === 0) {
-					queue = [];
-					isPlaying = false;
-					console.log('buh bye');
-					voiceChannel.leave();
-				} else {
-					console.log(queue);
-					console.log('else of disp.end');
-					playMusic(queue[0], message)
-				}
-			});
+		console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
 		})
 		.catch(console.error);
+
+		/////////////////////
 	}
 
 	const getId = (str, cb) => {
