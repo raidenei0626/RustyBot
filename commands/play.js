@@ -39,7 +39,7 @@ exports.run = (client, message, args) => {
 			stream = ytdl(completeUrl, {
 				// filter: "audioonly"
 				quality: 250,
-				highWaterMark: 1024 * 1024 * 10 // 10 megabytes
+				highWaterMark: 1024 * 1024 * 100 // 100 megabytes
 				// quality: 92   //--------> filter for live streams
 			});
 
