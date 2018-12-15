@@ -30,8 +30,8 @@ exports.run = (client, message, args) => {
 
 		console.log("vc type", typeof(voiceChannel));
 
-		// voiceChannel.setBitrate(24)
-		//   .then(vc => {
+		voiceChannel.setBitrate(24)
+		  .then(vc => {
 
 
 			voiceChannel.join().then(async function(connection) {
@@ -66,11 +66,11 @@ exports.run = (client, message, args) => {
 				});
 			});
 
-		// console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
-		// })
-		// .catch(console.error);
+		console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
+		})
+		.catch(console.error);
 
-		/////////////////////
+		/////////////
 	}
 
 	const getId = (str, cb) => {
