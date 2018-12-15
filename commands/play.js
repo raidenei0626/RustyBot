@@ -39,12 +39,7 @@ exports.run = (client, message, args) => {
 				client.logger.debug("id type" +  typeof(id))
 				console.log('video url', "https://www.youtube.com/watch?v="+id);
 
-				let completeUrl = "https://www.youtube.com/watch?v=" + id;
-				stream = ytdl(completeUrl, {
-					filter: "audioonly"
-				});
-
-				dispatcher = await connection.playStream(stream);
+				dispatcher = await connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
 				dispatcher.setVolume(client.volume/10);
 
 				stream.on('progress', (d, total, length) => {
