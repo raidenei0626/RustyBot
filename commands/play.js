@@ -94,7 +94,7 @@ exports.run = (client, message, args) => {
 
 
 
-		ytSearch( query, function ( err, r ) {
+		ytSearch( query+" lyrics", function ( err, r ) {
 		  if ( err ) throw err
 
 		  const videos = r.videos
