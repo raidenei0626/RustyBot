@@ -30,11 +30,11 @@ exports.run = (client, message, args) => {
 
 		console.log("vc type", typeof(voiceChannel));
 
-		voiceChannel.setBitrate(24)
-		  .then(vc => {
+		// voiceChannel.setBitrate(24)
+		//   .then(vc => {
 
 
-			vc.join().then(connection => {
+			voiceChannel.join().then(connection => {
 				console.log("idddddddddd", id)
 				client.logger.debug("id type" +  typeof(id))
 				console.log('video url', "https://www.youtube.com/watch?v="+id);
@@ -60,7 +60,7 @@ exports.run = (client, message, args) => {
 						queue = [];
 						isPlaying = false;
 						console.log('buh bye');
-						vc.leave();
+						voiceChannel.leave();
 					} else {
 						console.log(queue);
 						console.log('else of disp.end');
@@ -69,9 +69,9 @@ exports.run = (client, message, args) => {
 				});
 			});
 
-		console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
-		})
-		.catch(console.error);
+		// console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
+		// })
+		// .catch(console.error);
 
 		/////////////////////
 	}
