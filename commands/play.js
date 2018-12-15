@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
 
 		console.log("vc type", typeof(voiceChannel));
 
-		voiceChannel.setBitrate(48)
+		voiceChannel.setBitrate(24)
 		  .then(vc => {
 
 
