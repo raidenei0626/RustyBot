@@ -38,16 +38,17 @@ exports.run = (client, message, args) => {
 			let completeUrl = "https://www.youtube.com/watch?v=" + id;
 			stream = ytdl(completeUrl, {
 				// filter: "audioonly"
-				quality: 250
+				quality: 250,
+				highWaterMark: 1024 * 1024 * 10 // 10 megabytes
 				// quality: 92   //--------> filter for live streams
 			});
 
 			dispatcher = connection.playStream(stream);
 			dispatcher.setVolume(client.volume/10);
 
-			dispatcher.on('error', (e) => {
-			    console.error("error " + e);
-			});
+			stream.on('progress', (d, total, length) => {
+	          console.log('progress', total / length);
+	        });
 
 			dispatcher.on('end', () => {
 				// console.log("queue", queue);
