@@ -42,7 +42,7 @@ exports.run = (client, message, args) => {
 
 				let completeUrl = "https://www.youtube.com/watch?v=" + id;
 
-				const dispatcher = await connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
+				dispatcher = await connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
 				dispatcher.setVolume(client.volume/10);
 
 				dispatcher.on('progress', (d, total, length) => {
