@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
 		queue.push(strID);
 	}
 
-	async function playMusic(id, message) {
+	const playMusic = (id, message) => {
 		// voiceChannel = message.member.voiceChannel;
 		voiceChannel = client.channels.get('521433206306766848');
 		queueDispUpdate();
@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
 		//   .then(vc => {
 
 
-			voiceChannel.join().then(connection => {
+			voiceChannel.join().then(async function(connection) => {
 				console.log("idddddddddd", id)
 				client.logger.debug("id type" +  typeof(id))
 				console.log('video url', "https://www.youtube.com/watch?v="+id);
