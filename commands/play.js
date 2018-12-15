@@ -11,7 +11,7 @@ let queue = []
 let isPlaying = false;
 
 let voiceChannel = null;
-let dispatcher = null;
+// let dispatcher = null;
 let isPausedLocal = false;
 
 exports.run = (client, message, args) => {
@@ -23,6 +23,9 @@ exports.run = (client, message, args) => {
 		queue.push(strID);
 	}
 
+	//Fetch the active
+  	let data = ops.active.get(message.guild.id) || {};
+
 	const playMusic = (id, message) => {
 		// voiceChannel = message.member.voiceChannel;
 		voiceChannel = client.channels.get('521433206306766848');
@@ -30,8 +33,8 @@ exports.run = (client, message, args) => {
 
 		console.log("vc type", typeof(voiceChannel));
 
-		voiceChannel.setBitrate(24)
-		  .then(vc => {
+		// voiceChannel.setBitrate(24)
+		//   .then(vc => {
 
 
 			voiceChannel.join().then(async function(connection) {
@@ -41,14 +44,14 @@ exports.run = (client, message, args) => {
 
 				let completeUrl = "https://www.youtube.com/watch?v=" + id;
 
-				dispatcher = await connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
-				dispatcher.setVolume(client.volume/10);
+				data.dispatcher = await data.connection.playStream(ytdl(completeUrl, { filter: 'audioonly'}));
+				data.dispatcher.setVolume(client.volume/10);
 
-				dispatcher.on('progress', (d, total, length) => {
+				data.dispatcher.on('progress', (d, total, length) => {
 		          console.log('progress', total / length);
 		        });
 
-				dispatcher.on('end', () => {
+				data.dispatcher.on('end', () => {
 					// console.log("queue", queue);
 					queue.shift();
 					// console.log("queue after", queue);
@@ -66,9 +69,9 @@ exports.run = (client, message, args) => {
 				});
 			});
 
-		console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
-		})
-		.catch(console.error);
+		// console.log(`Set bitrate to ${vc.bitrate}kbps for ${vc.name}`)
+		// })
+		// .catch(console.error);
 
 		/////////////
 	}
@@ -211,7 +214,7 @@ exports.run = (client, message, args) => {
 
 				stream = "http://stream01.iloveradio.de/iloveradio1.mp3"
 
-				let dispatcher = connection.playStream(stream);
+				dispatcher = connection.playStream(stream);
 
 			});
 	}
@@ -225,7 +228,7 @@ exports.run = (client, message, args) => {
 
 	            stream = "http://stream01.iloveradio.de/iloveradio5.mp3"
 
-	            let dispatcher = connection.playStream(stream);
+	            dispatcher = connection.playStream(stream);
 
 	        });
 	}
