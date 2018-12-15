@@ -37,10 +37,7 @@ exports.run = (client, message, args) => {
 
 			let completeUrl = "https://www.youtube.com/watch?v=" + id;
 			stream = ytdl(completeUrl, {
-				// filter: "audioonly"
-				quality: 250,
-				highWaterMark: 1024 * 1024 * 100 // 100 megabytes
-				// quality: 92   //--------> filter for live streams
+				filter: "audioonly"
 			});
 
 			dispatcher = connection.playStream(stream);
