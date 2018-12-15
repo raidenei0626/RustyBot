@@ -11,7 +11,7 @@ let queue = []
 let isPlaying = false;
 
 let voiceChannel = null;
-// let dispatcher = null;
+let dispatcher = null;
 let isPausedLocal = false;
 
 exports.run = (client, message, args) => {
