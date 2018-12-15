@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
 		queue.push(strID);
 	}
 
-	const playMusic = (id, message) => {
+	async function playMusic(id, message) {
 		// voiceChannel = message.member.voiceChannel;
 		voiceChannel = client.channels.get('521433206306766848');
 		queueDispUpdate();
@@ -44,7 +44,7 @@ exports.run = (client, message, args) => {
 					filter: "audioonly"
 				});
 
-				dispatcher = connection.playStream(stream);
+				dispatcher = await connection.playStream(stream);
 				dispatcher.setVolume(client.volume/10);
 
 				stream.on('progress', (d, total, length) => {
