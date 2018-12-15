@@ -34,7 +34,7 @@ exports.run = (client, message, args) => {
 		//   .then(vc => {
 
 
-			voiceChannel.join().then(async function(connection) => {
+			voiceChannel.join().then(async function(connection) {
 				console.log("idddddddddd", id)
 				client.logger.debug("id type" +  typeof(id))
 				console.log('video url', "https://www.youtube.com/watch?v="+id);
