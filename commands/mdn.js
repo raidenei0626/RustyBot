@@ -32,6 +32,7 @@ exports.help = {
 // __main__
 let fields, result;
 exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
+
     if (args[0] === 'random') {
         let randomQuery = arrRandomQuery[(Math.random() * 10).toFixed(0)];
         fetch(baseURL + randomQuery)
@@ -68,19 +69,19 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
             false
         )
         // else search for docs
-        else searchMDNDocs(args[1], client, message)
+        else searchMDNDocs(args, client, message)
     }
 }
 
 
 /** Get the search term as param and send back the embed 
- * @param {String} query
+ * @param {Array} query
  * @param {Object} cliemt
  * @param {Object} message
 */
 const searchMDNDocs = (query, client, message) => {
     let result, fields;
-    fetch(baseURL + query.trim())
+    fetch(baseURL + createSearchQuery(query))
     .then(res => res.json())
     .then(res => {
 
@@ -114,4 +115,13 @@ const searchMDNDocs = (query, client, message) => {
             false
         )
     })
+}
+
+/** create a search query by joining all args 
+ * @param {Array} argArr
+*/
+
+const createSearchQuery = argArr => {
+    argArr.shift();
+    return argArr.join(' ')
 }
