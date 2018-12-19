@@ -45,6 +45,7 @@
             <span>Server Admin</span>
         </a>
     </li>
+    <% if(user) { %>  
     <% if(bot.settings.admins.includes(user.username)) { %>
 
         <li class="nav-item <%= path === `/botadmin` || path === `/botadmin/` ? `active` : '' %>">
@@ -54,6 +55,7 @@
             </a>
         </li>
         <% } %>
+        <% } %>  
 
 
     <!-- ========= BOT STATUS ========= -->
