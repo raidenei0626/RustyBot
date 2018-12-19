@@ -7,13 +7,17 @@ const app = express();
 const moment = require("moment");
 require("moment-duration-format");
 const passport = require("passport");
-const session = require("express-session");
-const LevelStore = require("level-session-store")(session);
+
 const Strategy = require("passport-discord").Strategy;
 const helmet = require("helmet");
 const md = require("marked");
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
 
 module.exports = (client) => {
+      console.log(1)
   // It's easier to deal with complex paths. 
   // This resolves to: yourbotdir/dashboard/
   const dataDir = path.resolve(`${process.cwd()}${path.sep}routes`);
@@ -35,6 +39,7 @@ module.exports = (client) => {
     done(null, obj);
   });
 
+      console.log(2)
   /* 
   This defines the **Passport** oauth2 data. A few things are necessary here.
   
@@ -62,15 +67,24 @@ module.exports = (client) => {
       process.nextTick(() => done(null, profile));
     }));
 
-
+      console.log(991)
   // Session data, used for temporary storage of your visitor's session information.
   // the `secret` is in fact a "salt" for the data, and should not be shared publicly.
-  app.use(session({
-    store: new LevelStore("./routes/data/dashboard-session/"),
-    secret: client.settings.tokens.seshSecret,
+
+mongoose.connect(client.settings.tokens.mlabs, {
+    useNewUrlParser: true
+});
+mongoose.Promise = global.Promise;
+const db = mongoose.connection
+
+app.use(cookieParser());
+
+app.use(session({
+    secret: 'my-secret',
     resave: false,
-    saveUninitialized: false,
-  }));
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: db })
+}));
 
   // Initializes passport and session.
   app.use(passport.initialize());
@@ -116,8 +130,7 @@ module.exports = (client) => {
     res.render(path.resolve(`${templateDir}${path.sep}${template}`), Object.assign(baseData, data));
   };
 
-
-  /** PAGE ACTIONS RELATED TO SESSIONS */
+      console.log(44)/** PAGE ACTIONS RELATED TO SESSIONS */
 
   // The login page saves the page the person was on in the session,
   // then throws the user to the Discord OAuth2 login page.
@@ -371,6 +384,8 @@ module.exports = (client) => {
     if (!isManaged && !req.session.isAdmin) res.redirect("/");
     renderTemplate(res, req, "pages/guild-modules.ejs", { guild });
   });
+  
+  console.log("MATT")
 
   // Leaves the guild (this is triggered from the manage page, and only
   // from the modal dialog)
@@ -393,5 +408,5 @@ module.exports = (client) => {
     res.redirect("/dashboard/" + req.params.guildID);
   });
 
-  client.site = app.listen(1000);
+  client.site = app.listen(8003);
 };

@@ -9,9 +9,8 @@ module.exports = async client => {
     }, 60000);
 
     // Loads the dasboard
-    // require("../modules/dashboard")(client);
-    require("../modules/mattboard")(client);
-
+    require("../modules/dashboard")(client);
+   
     // Set the Bots Status
     client.user.setStatus('dnd')
     client.user.setPresence({
