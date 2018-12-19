@@ -17,7 +17,6 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
 module.exports = (client) => {
-      console.log(1)
   // It's easier to deal with complex paths. 
   // This resolves to: yourbotdir/dashboard/
   const dataDir = path.resolve(`${process.cwd()}${path.sep}routes`);
@@ -39,7 +38,6 @@ module.exports = (client) => {
     done(null, obj);
   });
 
-      console.log(2)
   /* 
   This defines the **Passport** oauth2 data. A few things are necessary here.
   
@@ -67,24 +65,23 @@ module.exports = (client) => {
       process.nextTick(() => done(null, profile));
     }));
 
-      console.log(991)
   // Session data, used for temporary storage of your visitor's session information.
   // the `secret` is in fact a "salt" for the data, and should not be shared publicly.
 
-mongoose.connect(client.settings.tokens.mlabs, {
+  mongoose.connect(client.settings.tokens.mlabs, {
     useNewUrlParser: true
-});
-mongoose.Promise = global.Promise;
-const db = mongoose.connection
+  });
+  mongoose.Promise = global.Promise;
+  const db = mongoose.connection
 
-app.use(cookieParser());
+  app.use(cookieParser());
 
-app.use(session({
+  app.use(session({
     secret: 'my-secret',
     resave: false,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: db })
-}));
+  }));
 
   // Initializes passport and session.
   app.use(passport.initialize());
@@ -130,7 +127,7 @@ app.use(session({
     res.render(path.resolve(`${templateDir}${path.sep}${template}`), Object.assign(baseData, data));
   };
 
-      console.log(44)/** PAGE ACTIONS RELATED TO SESSIONS */
+  /** PAGE ACTIONS RELATED TO SESSIONS */
 
   // The login page saves the page the person was on in the session,
   // then throws the user to the Discord OAuth2 login page.
@@ -153,7 +150,7 @@ app.use(session({
   // Here we check if the user was already on the page and redirect them
   // there, mostly.
   app.get("/callback", passport.authenticate("discord", { failureRedirect: "/autherror" }), (req, res) => {
-    console.log(req.user.username)
+    client.logger.log(`${req.user.username} logged into the dashboard`)
     if (client.settings.admins.includes(req.user.username)) {
       req.session.isAdmin = true;
     } else {
@@ -166,7 +163,6 @@ app.use(session({
     } else {
       res.redirect("/dashboard");
     }
-    console.log(req.session.isAdmin)
   });
 
   // If an error happens during authentication, this is what's displayed.
@@ -205,10 +201,10 @@ app.use(session({
   app.get("/stats", (req, res) => {
     const duration = moment.duration(client.uptime).format("DD:HH:mm:ss");
     let durLabel;
-    if(duration.length === 2) durLabel = " Seconds"
-    if(duration.length === 5) durLabel = " Minutes"
-    if(duration.length === 8) durLabel = " Hours"
-    if(duration.length === 11) durLabel = " Days"
+    if (duration.length === 2) durLabel = " Seconds"
+    if (duration.length === 5) durLabel = " Minutes"
+    if (duration.length === 8) durLabel = " Hours"
+    if (duration.length === 11) durLabel = " Days"
 
     const members = client.guilds.reduce((p, c) => p + c.memberCount, 0);
     const textChannels = client.channels.filter(c => c.type === "text").size;
@@ -283,7 +279,6 @@ app.use(session({
     const guild = client.guilds.get(req.params.guildID);
     const mArray = [];
     guild.members.array().forEach(m => {
-      // console.log(m)
       let user = {}
       user.details = [m.user.username, m.user.id, m.nickname]
       user.bot = m.user.bot
@@ -293,13 +288,13 @@ app.use(session({
 
       let roles = []
       m.roles.filter(r => r.name !== "@everyone").map(r => {
-        roles.push({name: r.name, pos: r.position, col: r.hexColor})
+        roles.push({ name: r.name, pos: r.position, col: r.hexColor })
       })
       user.roles = roles
 
       mArray.push(user)
     });
-    
+
     if (!guild) return res.status(404);
     renderTemplate(res, req, "pages/guild-members.ejs", {
       guild: guild,
@@ -384,8 +379,6 @@ app.use(session({
     if (!isManaged && !req.session.isAdmin) res.redirect("/");
     renderTemplate(res, req, "pages/guild-modules.ejs", { guild });
   });
-  
-  console.log("MATT")
 
   // Leaves the guild (this is triggered from the manage page, and only
   // from the modal dialog)
