@@ -27,9 +27,9 @@ exports.run = (client, message, args, level) => {
 
     const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
     sorted.forEach( c => {
-    
+
       emHelp.addField(`${client.settings.general.prefix}${c.help.name}`, `${c.help.description}`)
-    
+
     });
         message.channel.send({embed: emHelp})
     //message.channel.send(output, {code: "asciidoc", split: { char: "\u200b" }});
