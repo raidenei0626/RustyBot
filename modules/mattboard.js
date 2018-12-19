@@ -393,5 +393,5 @@ module.exports = (client) => {
     res.redirect("/dashboard/" + req.params.guildID);
   });
 
-  client.site = app.listen(8003);
+  client.site = app.listen(1000);
 };

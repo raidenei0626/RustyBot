@@ -10,7 +10,7 @@ module.exports = async client => {
 
     // Loads the dasboard
     // require("../modules/dashboard")(client);
-    require("../modules/dashboard")(client);
+    require("../modules/mattboard")(client);
 
     // Set the Bots Status
     client.user.setStatus('dnd')

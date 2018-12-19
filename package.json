@@ -13,7 +13,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
-    "discord.js": "^11.4.2",
+    "discord.js": "^11.4.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-passport": "^0.1.0",
