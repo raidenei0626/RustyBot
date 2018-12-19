@@ -3,10 +3,22 @@ const config = {
     "ownerID": "179604866807627777",
   
     // Bot Admins, level 9 by default. Array of user ID strings. 
-    "admins": [],
+    "admins": ["Mattchow", "Mattt"],
   
     // Bot Support, level 8 by default. Array of user ID strings
     "support": [],
+
+    // Confidential Tokens - Usage Eg: client.tokens.bottoken
+    "tokens": require("./tokens.json"),
+
+    // Dashboard Settings
+    "dashboard" : {
+      "oauthSecret": "hF6DDQwLZZhJqsnjWh1wHXM8yJmoM7Kn",
+      "callbackURL": `http://localhost:1000/callback`,
+      "sessionSecret": "assssssssssssssssssssssssssssss3s3we5fsssssssssssf",
+      "domain": "localhost",
+      "port": 5000
+    },
   
     // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
     "token": require("./tokens.json").token,
@@ -14,7 +26,7 @@ const config = {
     // mLab credentials
     "mlabs": require("./tokens.json").mlabs,
   
-
+    tokens:  require("./tokens.json"),
     
     "general" : {
       "prefix": "+",

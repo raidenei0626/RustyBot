@@ -1,0 +1,37 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Bot Status</a>
+          </li>
+          <li class="breadcrumb-item active">Live Status</li>
+        </ol>
+      </div>
+
+<%- console.log(stats) %>
+      <div class="row mx-auto text-center text-secondary">
+        
+        <% stats.forEach(function(s, i) { %>
+            <div class="col-md-4 col-sm-6 p-3">
+              <div class="bg-dark p-4 border border-light">
+                <i class="<%- s[1] %> display-2 text-white" aria-hidden="true"></i>
+                <h3 class="display-4 pt-2"><%- s[2] %></h3>
+                <h4 class="m-3"><%- s[0] %></h4>
+              </div>
+            </div>
+            
+                <% }) %>
+          </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <% include ../partials/footer %>
+
+

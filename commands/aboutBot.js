@@ -14,7 +14,8 @@ exports.help = {
     name: "about",
     category: "Miscelaneous",
     description: "Display info about the bot and its contributors",
-    usage: "about"
+    usage: "about",
+    icon: "http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-help-about-icon.png"
 };
 
 exports.run = (client, message) => { // eslint-disable-line no-unused-vars

@@ -1,0 +1,49 @@
+<div class="bg-dark p-4 border border-light text-center">
+    <% if (guild.icon) { %>
+        <img class="card-img-top" style="width: 100%;" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256` %>"
+          alt="">
+        <% } else { %>
+            <canvas style="background-color: #7289da"  class="card-img-top" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>"
+                    width="200rem" height="200rem"></canvas>
+                  <script>
+                    function draw() {
+                      const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext(
+                        '2d');
+                      ctx.font = '50px Arial';
+                      ctx.textAlign = "center";
+                      ctx.fillStyle = "white";
+                      ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 95, 115);
+                    };
+                    draw();
+                  </script>
+
+
+          <% } %>
+    <h5 class="pt-4 text-warning"><%= guild.name %></h5>
+    <hr class="bg-secondary px-3 mx-3 mb-4">
+
+    <div class="text-left text-muted">
+        <h6 class="text-white text-center pb-1">Created:</h6>
+        <h6><i class="fas fa-chess-queen mr-3 text-warning"></i> <%= `${guild.owner.user.tag}` %></h6>
+        <h6><i class="fas fa-calendar-plus mr-3 text-warning"></i> <%= moment(guild.createdTimestamp).format('Do MMMM YYYY'); %></h6>
+        <h6><i class="far fa-clock mr-3 text-warning"></i> <%= moment(guild.createdTimestamp).format('H:mm:ss'); %></h6>
+    </div>
+
+    <div class="text-left text-muted my-4">
+        <h6 class="text-white text-center pb-1">Members:</h6>
+        <h6><i class="fa fa-fw fa-users mr-3 text-warning"></i> <%= `${guild.memberCount - guild.members.filter(m => m.user.bot).size}` %> Members</h6>
+        <h6><i class="fas fa-robot mr-3 text-warning"></i> <%= `${guild.members.filter(m => m.user.bot).size}` %> Bots</h6>
+    </div>
+
+    <div class="text-left text-muted my-4">
+        <h6 class="text-white text-center pb-1">Roles & Channels:</h6>
+        <h6><i class="fas fa-shield-alt mr-3 text-warning"></i> <%= guild.roles.size %> Roles</h6>
+        <h6><i class="fab fa-slack-hash mr-3 text-warning"></i> <%= `${guild.channels.filter(c => c.type === 'text').size}`%> Text Channels</h6>
+        <h6><i class="fas fa-microphone mr-3 text-warning"></i> <%= `${guild.channels.filter(c => c.type === 'voice').size}`%> Voice Channels</h6>
+    </div>
+
+    <a class="btn btn btn-outline-danger text-white mt-3" data-toggle="modal" data-target="#serverLeaveModal" role="button">Leave
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+  </a>
+
+  </div>

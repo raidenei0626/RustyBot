@@ -12,7 +12,8 @@ exports.help = {
     name: "buddy",
     category: "Miscelaneous",
     description: "Buddy Pairing system",
-    usage: "initmenu <menu-name>"
+    usage: "initmenu <menu-name>",
+    icon: "https://nichs.org.uk/wp-content/uploads/2016/10/20.jpg"
 };
 
 

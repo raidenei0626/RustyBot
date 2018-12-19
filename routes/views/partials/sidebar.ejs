@@ -1,0 +1,80 @@
+<!-- Sidebar -->
+<ul class="sidebar navbar-nav pb-5">
+
+    <li class="nav-header">general</li>
+
+    <li class="nav-item <%= path === `/dashboard` || path === `/dashboard/` ? `active` : '' %>">
+        <a class="nav-link" href="/dashboard/">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= path === `/commands` || path === `/commands/` ? `active` : '' %>">
+        <a class="nav-link" href="/commands/">
+            <i class="fas fa-magic"></i>
+            <span>Commands</span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= path === `/invite` || path === `/invite/` ? `active` : '' %>">
+        <a class="nav-link" href="/invite/">
+            <i class="far fa-plus-square"></i>
+            <span>Invite</span>
+        </a>
+    </li>
+
+    <li class="nav-item <%= path === `/api` || path === `/api/` ? `active` : '' %>">
+        <a class="nav-link" href="/api">
+            <i class="fas fa-parachute-box"></i>
+            <span> API</span>
+        </a>
+    </li>
+
+
+
+
+
+
+    <li class="nav-header">Administration</li>
+
+
+    <li class="nav-item <%= path === `/admin` || path === `/admin/` ? `active` : '' %>">
+        <a class="nav-link" href="/admin/">
+            <i class="fas fa-toolbox"></i>
+            <span>Server Admin</span>
+        </a>
+    </li>
+    <% if(bot.settings.admins.includes(user.username)) { %>
+
+        <li class="nav-item <%= path === `/botadmin` || path === `/botadmin/` ? `active` : '' %>">
+            <a class="nav-link" href="/botadmin/">
+                <i class="fas fa-cogs"></i>
+                <span>Bot Admin</span>
+            </a>
+        </li>
+        <% } %>
+
+
+    <!-- ========= BOT STATUS ========= -->
+    <li class="nav-header">Bot Status</li>
+    <li class="nav-item <%= path === `/stats` || path === `/stats/` ? `active` : '' %>">
+        <a class="nav-link" href="/stats">
+            <i class="fas fa-heartbeat"></i>
+            <span>Bot Status</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://github.com/MattCSmith/zeroBot-v3.0">
+            <i class="fab fa-github"></i>
+            <span>Project Repo</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="https://github.com/MattCSmith/zeroBot-v3.0/issues">
+            <i class="fas fa-bug"></i>
+            <span>Report Bugs</span>
+        </a>
+    </li>
+
+</ul>

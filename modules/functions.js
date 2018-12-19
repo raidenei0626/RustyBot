@@ -1,5 +1,12 @@
 module.exports = (client) => {
 
+  client.getSettings = () => {
+    console.log(client.settings.general)
+    return client.settings.general
+  }
+
+
+
   // Update User Stats Function
   client.updateUser = (message, stat) => {
     // console.log(message)

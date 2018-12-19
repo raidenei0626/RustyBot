@@ -1,0 +1,31 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb bg-dark">
+          <li class="breadcrumb-item">
+            <a href="#">General</a>
+          </li>
+          <li class="breadcrumb-item active">API!</li>
+        </ol>
+      </div>
+
+      <div class="mx-auto px-4 text-secondary">
+
+      <h1 class="display-3 text-center text-secondary">API Documentation</h1>
+      
+      <p class="text-muted text-center mt-0">The API is still in the early development stage, more information will follow.</p>
+        <br>
+      <strong>End Points</strong>
+      <ul>
+          <li>api.zerobot.xyz/v3/users</li>
+      </ul>
+</div>
+    </div>
+    <!-- /.container-fluid -->
+
+    <% include ../partials/footer %>

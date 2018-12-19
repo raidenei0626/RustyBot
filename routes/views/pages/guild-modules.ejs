@@ -1,0 +1,28 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">Server Modules</li>
+        </ol>
+      </div>
+
+      <div class="mx-auto px-4 text-secondary">
+
+          <h1 class="display-3 text-center text-secondary">Modules</h1>
+          <%- include('../partials/guild/guild-nav', {active: "stats", guild}) %>
+          <p>To Be Done</p>
+         
+      </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <% include ../partials/footer %>

@@ -1,0 +1,7 @@
+
+<%= console.log(active) %>
+<div class="text-center my-4">
+    <a class="btn btn-outline-<%= active === 'manage' ? 'secondary active' : 'light'  %> w-25 mx-3" href="/dashboard/<%= guild.id %>/manage">Settings</a>
+    <a class="btn btn-outline-<%= active === 'module' ? 'secondary active' : 'light'  %> w-25 mx-3" href="/dashboard/<%= guild.id %>/modules">Modules</a>
+    <a class="btn btn-outline-<%= active === 'members' ? 'secondary active' : 'light'  %> w-25 mx-3" href="/dashboard/<%= guild.id %>/members">Members</a>
+</div>

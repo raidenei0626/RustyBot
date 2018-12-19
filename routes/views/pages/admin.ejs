@@ -1,0 +1,67 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Administration</a>
+          </li>
+          <li class="breadcrumb-item active">Manage Server</li>
+        </ol>
+      </div>
+      
+      <h1 class="display-3 text-center text-secondary pb-3">Manage Server</h1>
+
+      <div class="row mx-auto text-center">
+          <% user.guilds.forEach(guild => { 
+            const permsOnGuild = new perms(guild.permissions);
+            if(!permsOnGuild.has("MANAGE_GUILD")) return;
+            if(!bot.guilds.get(guild.id)) return;
+          %>
+      
+            <div class="col-md-6 col-sm-6 p-3">
+              <div class="bg-dark p-4 border border-white">
+                <% if (guild.icon) { %>
+                  <img class="d-flex m-auto rounded-circle" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128` %>" style="width: 80px;" alt="">
+                <% } else { %>
+                  <canvas style="background-color: #7289da" class="d-flex m-auto rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="80px" height="80px"></canvas>
+                  <script>
+                    function draw() {
+                      const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+                      ctx.font = '30px Arial';
+                      ctx.textAlign = "center";
+                      ctx.fillStyle = "white";
+                      ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 40, 50);
+                    };
+                    draw();
+                  </script>
+                <% } %>
+                <h5 class="m-3 text-white"><%= guild.name.slice(0, 18) %></h5>
+                <% 
+                  let href, text;
+                  let enabled;
+                  if(bot.guilds.get(guild.id)) {
+                    href = `/dashboard/${guild.id}/manage`;
+                    text = "Manage";
+                    enabled = true;
+                  } else {
+                    href = `https://discordapp.com/oauth2/authorize?client_id=${bot.appInfo.id}&scope=bot&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(bot.settings.dashboard.callbackURL)}`;
+                    text = "Invite Bot";
+                    enabled = bot.appInfo.botPublic;
+                  }
+                  %> 
+                  <a class="btn btn-outline-light <% if(!enabled) { %> disabled<% } %>" role="button" href="<%= href %>"><%= text %> <i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i></a>
+              </div>
+            </div>
+      
+         <% }); %>
+          </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <% include ../partials/footer %>

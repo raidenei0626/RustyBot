@@ -62,7 +62,7 @@ const init = async () => {
     }
 
     client.login(client.settings.token);
-    require("./web/config")(client)
+    require("./routes/apiRoutes")(client)
     // client.updateStats()
 }
 

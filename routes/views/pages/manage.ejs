@@ -1,0 +1,41 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item">
+              <a href="#">Server Management</a>
+            </li>
+          <li class="breadcrumb-item active"><%- guild.name %></li>
+        </ol>
+      </div>
+
+      <div class="mx-auto px-4 text-secondary">
+
+        <h1 class="display-3 text-center text-secondary"><%- guild.name %></h1>
+        <%- include('../partials/guild/guild-nav.ejs', {active: "manage", guild}) %>
+        <hr class="bg-secondary px-5 mx-5">
+
+        <div class="row">
+          <div class="col-md-4">
+            <%- include('../partials/guild/guild-info', {guild}) %>
+          </div>
+          <div class="col-md-8">
+            <%- include('../partials/guild/guild-settings', {guild}) %>
+          </div>
+        </div>
+          
+          
+      </div>
+
+    </div>
+    <!-- /.container-fluid -->
+    <% include ../partials/guild/guild-modals %>
+    <% include ../partials/footer %>

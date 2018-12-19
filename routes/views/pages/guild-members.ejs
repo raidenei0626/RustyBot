@@ -1,0 +1,53 @@
+<%- include(`../partials/head`, {guild, user, path, guild}) %>
+  <%- include(`../partials/sidebar`) %>
+  <%= console.log(guild.name, guild.memberCount) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Server Admin</a>
+          </li>
+          <li class="breadcrumb-item">
+              <a href="#"><%- guild.name %></a>
+            </li>
+          <li class="breadcrumb-item active">Member List</li>
+        </ol>
+      </div>
+
+      <div class="mx-auto px-4 text-secondary">
+
+        <h1 class="display-3 text-center text-secondary">Member List</h1>
+        <%- include('../partials/guild/guild-nav.ejs', {active: "members", guild}) %>
+        <hr class="bg-secondary px-5 mx-5">
+        <div class="row mx-auto text-center">
+        <% members.forEach(function(m) { %>
+          <% 
+          let name = m.details[2] ? m.details[2] : m.details[0]      
+          %>
+          <div class="col-md-4 col-sm-6 p-3">
+            <div class="bg-dark p-4 border border-light">
+              <img class="d-flex m-auto rounded-circle" src="<%= m.avatar ? m.avatar : `https://robohash.org/${m.details[0]}.png` %>"
+                style="width: 80px;" alt="">
+              <h4 class="m-3" style="color: <%= m.rank[1] !== "#000000" ? m.rank[1] : `#fff` %>">
+                <%= name.length > 13 ? name.slice(0, 13) + "..." : name %>
+              </h4>
+              <a class="btn btn-outline-light" role="button" href="#">
+                More Info
+              </a>
+            </div>
+          </div>
+          
+        <% }); %>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+    <% include ../partials/footer %>

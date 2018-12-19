@@ -1,0 +1,77 @@
+<%- include(`../partials/head`, {bot, user, path}) %>
+  <%- include(`../partials/sidebar`) %>
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid py-3 px-4">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Commands</a>
+          </li>
+          <li class="breadcrumb-item active">Overview!</li>
+        </ol>
+        <% const help = {};
+              bot.commands.forEach((command) => {
+                const cat = command.help.category;
+                if (!help.hasOwnProperty(cat)) help[cat] = [];
+                help[cat].push(command);
+              });
+              const prefix = bot.settings.general.prefix
+              %>
+
+
+          <% for (const category in help) { %>
+            <h3 class="text-white">
+              <%= category %>
+            </h3>
+
+            <!-- Icon Cards-->
+            <div class="row">
+              <% for (const command of help[category]) { %>
+                <div class="col-md-4 d-flex my-3">
+
+                  <div class="card bg-dark border-secondary text-center p-3 flex-fill">
+
+                    <img class="card-img-top w-25 mx-auto d-block" src="<%= command.help.icon %>" alt="<%=  command.help.name %>">
+                    <div class="card-body">
+                      <h4 class="card-title text-warning">
+                        <%= prefix + command.help.name %>
+                      </h4>
+                      <p class="card-text text-muted">
+                        <%= command.help.description %>
+                      </p>
+
+
+                    </div>
+                    <a href="#" data-toggle="modal" data-target="#<%= `${command.help.name}` %>Modal" class="btn btn-outline-light btn-sm px-4 py-2 mx-4 mb-3">Info</a>
+                    <span class="badge badge-secondary p-1">
+                      <%= command.conf.permLevel %> Command</span>
+                  </div>
+
+                </div>
+                <div id="<%= `${command.help.name}` %>Modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header btn-info disabled">
+                          <h4 class="modal-title"><%= command.help.name %></h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Usage Example: <%= command.help.usage %></p>
+                          <p>Command Aliases: <%= `${command.conf.aliases.join(', ')}` %></p>
+                        </div>
+                        <div class="modal-footer"><button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button></div>
+                      </div>
+                    </div>
+                  </div>
+                <% } %>
+            </div>
+
+            <% } %>
+
+      </div>
+      <!-- /.container-fluid -->
+
+      <% include ../partials/footer %>
