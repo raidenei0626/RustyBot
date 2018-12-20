@@ -1,3 +1,4 @@
+
 //This event fires every time a message is received
 module.exports = async (client, message) => {
 
@@ -6,10 +7,11 @@ module.exports = async (client, message) => {
     client.updateUser(message, "mCount")
     return;
   }
+
   // Checks if the bot was mentioned, with no message after it, returns the prefix.
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix on this server is \`${client.settings.general.prefix}\``);
+      message.reply(`My prefix on this server is \`${client.settings.general.prefix}\``)
   }
 
   // Also good practice to ignore any message that does not start with our prefix,
