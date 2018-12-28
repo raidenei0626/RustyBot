@@ -37,8 +37,19 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
         if (!userr) {
             message.reply("We have not data for this user")
         } else {
-            fields = [["Joined ZTM", userr.joined, true], ["Joined Discord", userr.created, true], ["Messages Sent", userr.stats.mCount, true], ["Commands Issues", userr.stats.cmd, true]]
-            client.sendembed(message.channel, `User stats for ${userArray[1]}`, userArray[2], "Description here", fields, "#000", boolean = true)
+            fields = [
+                ["Joined ZTM", userr.joined, true],
+                ["Joined Discord", userr.created, true],
+                ["Messages Sent", userr.stats.mCount, true],
+                ["Commands Issues", userr.stats.cmd, true]
+            ]
+            client.sendembed({
+                method: message.channel,
+                title: `User stats for ${userArray[1]}`,
+                thumb: userArray[2],
+                fields: fields,
+                color: "#000"
+            })
         }
     })
 

@@ -45,29 +45,26 @@ exports.run = (client, message, args) => { // eslint-disable-line no-unused-vars
                 ["Tags", result.tags.join(' · ') || 'NA', true]
             ];
 
-            return client.sendembed(
-                message.channel, 
-                'Result For ' + result.title, 
-                client.user.avatarURL, 
-                TD.turndown(result.excerpt) || 'NA', 
-                fields, 
-                '#d30f65', 
-                false
-            )
+            return client.sendembed({
+                method: message.channel,
+                title: 'Result For ' + result.title,
+                thumb: client.user.avatarURL,
+                desc: TD.turndown(result.excerpt) || 'NA',
+                fields: fields,
+                color: '#d30f65'
+            })
         })
 
     } else if (args[0] === 'search') {
 
         // checks if it has a search query
-        if (!args[1]) return client.sendembed(
-            message.channel, 
-            'No Search Query Detected', 
-            client.user.avatarURL, 
-            'You have to provide a search query. For example, `mdn Array.prototype.slice()`. For a random search, you can use `mdn random`',
-            null, 
-            '#d30f65', 
-            false
-        )
+        if (!args[1]) return client.sendembed({
+            method: message.channel,
+            title: 'No Search Query Detected',
+            thumb: client.user.avatarURL,
+            desc: 'You have to provide a search query. For example, `mdn Array.prototype.slice()`. For a random search, you can use `mdn random`',
+            color: '#d30f65'
+        })
         // else search for docs
         else searchMDNDocs(args, client, message)
     }
@@ -87,15 +84,12 @@ const searchMDNDocs = (query, client, message) => {
 
         // if no data from MDN
         if (res.documents.length === 0) {
-            return client.sendembed(
-                message.channel, 
-                client.user.tag, 
-                null, 
-                'Couldn\'t find anything in MDN. Maybe try something else? :thinking:', 
-                null, 
-                '#b90900', 
-                false
-            )
+            return client.sendembed({
+                method: message.channel,
+                title: "Nothing Found",
+                desc: 'Couldn\'t find anything in MDN. Maybe try something else? :thinking:', 
+                color: '#b90900',
+            })
         }
 
         // return search result 
@@ -105,14 +99,14 @@ const searchMDNDocs = (query, client, message) => {
             ['Tags', result.tags.join(' · ') || 'NA', false]
         ]
 
-        return client.sendembed(
-            message.channel, 
-            'Result For ' + result.title, 
-            client.user.avatarURL, 
-            TD.turndown(result.excerpt) || 'NA', 
-            fields, 
-            '#078400', 
-            false
+        return client.sendembed({
+            method: message.channel,
+            title: 'Result For ' + result.title,
+            thumb: client.user.avatarURL,
+            color: '#078400',
+            desc: TD.turndown(result.excerpt) || 'NA',
+            fields: fields
+        }
         )
     })
 }

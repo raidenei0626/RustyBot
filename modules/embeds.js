@@ -2,17 +2,18 @@ module.exports = (client) => {
     const Discord = require("discord.js");
 
     client.sendembed = (argsObj) => {
-        const {colour, title, url, author, thumb, desc, image, footer, fields} = argsObj
+        console.log("RUNNINGS")
+        const {color, title, url, author, thumb, desc, image, footer, fields, method} = argsObj
         let embed101 = new Discord.RichEmbed()
             
-            .setColor(colour)
-            .setTitle(title)
+            .setColor(color)
+            if(title !== undefined) embed101.setTitle(title)
             .setURL(url)
-            .setAuthor(author)
+            if(author !== undefined) embed101.setAuthor(author)
             .setThumbnail(thumb)
-            .setDescription(desc)
+            if(desc !== undefined) embed101.setDescription(desc)
             .setImage(image)
-            .setFooter(footer)
+            if(footer !== undefined) embed101.setFooter(footer)
             
             if(fields){
                 fields.forEach((f, i) => {
