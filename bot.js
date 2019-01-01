@@ -19,7 +19,7 @@ client.settings = {} = require("./config.js");
 menu = require("./modules/embedMenus")
 require("./modules/functions.js")(client);
 require("./modules/databases.js")(client)
-client.logger = require("./modules/Logger");
+client.logger = require("./modules/logger");
 
 menu.init()
 
