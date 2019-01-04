@@ -302,6 +302,36 @@ module.exports = (client) => {
     });
   });
 
+    // Channel Listing
+    app.get("/dashboard/:guildID/c", checkAuth, async (req, res) => {
+      const guild = client.guilds.get(req.params.guildID);
+
+      let cateObj = [];
+
+      const sort = (data) => {
+        data.sort(function (a, b) {
+          return a.position - b.position;
+        });
+      }
+
+      guild.channels.forEach(c => {
+        if(c.type === "category") {
+          let chans = guild.channels.filter(chan => chan.parentID === c.id).map(chan => ({ name: chan.name, id: chan.id, position: chan.position, topic: chan.topic, type: chan.type }))
+          sort(chans)
+          cateObj.push({name: c.name, id: c.id, position: c.position, channels: chans})
+        }
+      })
+
+
+      sort(cateObj)
+
+
+        renderTemplate(res, req, "pages/channels.ejs", {
+          cats: cateObj
+        });
+      });
+
+
   // This JSON endpoint retrieves a partial list of members. This list can
   // be filtered, sorted, and limited to a partial count (for pagination).
   // NOTE: This is the most complex endpoint simply because of this filtering

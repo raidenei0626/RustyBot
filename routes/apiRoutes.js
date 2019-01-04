@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8002;
+const port = 8000;
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const fetch = require('node-fetch');
@@ -16,6 +16,47 @@ module.exports = (client) => {
         res.send('API ZeroBot V3');
     })
 
+    // Channel API
+    app.get('/channels/:guild/', function (req, res) {
+
+        const guild = client.guilds.get(req.params.guild);
+        let cateObj = [];
+
+        const sort = (data) => {
+            data.sort(function (a, b) {
+                return a.position - b.position;
+            });
+        }
+
+        if(guild){
+            guild.channels.forEach(c => {
+                if (c.type === "category") {
+                    let chans = guild.channels.filter(chan => chan.parentID === c.id).map(chan => ({
+                        name: chan.name,
+                        id: chan.id,
+                        position: chan.position,
+                        topic: chan.topic,
+                        type: chan.type
+                    }))
+                    sort(chans)
+                    cateObj.push({
+                        name: c.name,
+                        id: c.id,
+                        position: c.position,
+                        channels: chans
+                    })
+                }
+            })
+            sort(cateObj)
+            res.send(cateObj)
+        }else{
+            console.log("No guild found (API)")
+            res.send("Error: Guild not found")
+        }
+
+        
+    })
+    
     // Buddy View
     app.get('/buddy', function (req, res) {
         client.buddyDB.find({})

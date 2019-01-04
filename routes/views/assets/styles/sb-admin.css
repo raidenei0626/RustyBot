@@ -410,3 +410,19 @@ body.sidebar-toggled footer.sticky-footer {
   font-weight: 900;
   font-size: 1.5em
 }
+
+.modal-header {
+  border-bottom: 1px solid #6d6d6d7e
+}
+.close {
+  color: #cacaca
+}
+.modal-content {
+  background-color: #252629;
+  color: #777;
+  border: 1px solid rgba(255, 255, 255, 0.597)
+}
+
+.modal-footer {
+  border-top: none;
+}
