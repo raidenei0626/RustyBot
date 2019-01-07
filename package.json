@@ -4,9 +4,10 @@
   "description": "Discord bot for the ZTM community!",
   "main": "bot.js",
   "scripts": {
-    "start": "nodemon bot.js",
     "bot": "node bot.js",
-    "prebot": "git reset --hard  && git pull origin master && npm i"
+    "prebot": "git reset --hard  && git pull origin master && npm i",
+    "pretty": "pretty-quick --staged",
+    "start": "nodemon bot.js"
   },
   "author": "",
   "license": "ISC",
