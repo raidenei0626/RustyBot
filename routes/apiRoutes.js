@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const port = 8000;
-const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const fetch = require('node-fetch');
 
