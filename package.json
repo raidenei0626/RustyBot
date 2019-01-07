@@ -4,9 +4,10 @@
   "description": "Discord bot for the ZTM community!",
   "main": "bot.js",
   "scripts": {
-    "start": "nodemon bot.js",
     "bot": "node bot.js",
-    "prebot": "git reset --hard  && git pull origin master && npm i"
+    "prebot": "git reset --hard  && git pull origin master && npm i",
+    "pretty": "pretty-quick --staged",
+    "start": "nodemon bot.js"
   },
   "author": "",
   "license": "ISC",
@@ -35,6 +36,9 @@
     "ytdl-core": "^0.28.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.7"
+    "husky": "^1.3.1",
+    "nodemon": "^1.18.7",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0"
   }
 }
