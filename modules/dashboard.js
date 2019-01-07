@@ -81,7 +81,6 @@ module.exports = client => {
       useNewUrlParser: true
     }
   );
-  mongoose.Promise = global.Promise;
   const db = mongoose.connection;
 
   app.use(cookieParser());
