@@ -1,15 +1,13 @@
 const Discord = require('discord.js');
 const fetch = require('node-fetch');
 const Turndown = require('turndown');
-const cheerio = require('cheerio');
-const request = require('request');
 
 // init  && config
 const TD = new Turndown();
 fetch.promise = Promise;
 const baseURL =
   'https://developer.mozilla.org/en-US/search.json/?topic=javascript,html,css&q=';
-const baseUrl = 'https://developer.mozilla.org/en-US/docs/Web/';
+const baseUrl = 'https://developer.mozilla.org/en-US/search.json/';
 const arrRandomQuery = [
   'width',
   'height',
@@ -22,15 +20,7 @@ const arrRandomQuery = [
   'length',
   'Object.hasOwnProperty()'
 ];
-const mdnTopics = [
-  'HTML',
-  'CS',
-  'JavaScript',
-  'HTTP',
-  'Accessibility',
-  'API',
-  'SVG'
-];
+const mdnTopics = ['html', 'js', 'css'];
 
 TD.addRule('mark', {
   filter: ['mark'],
@@ -79,18 +69,6 @@ exports.run = (client, message, args) => {
     //       color: '#d30f65'
     //     });
     //   });
-    request(baseUrl + randomTopic + '/index/', function(error, response, html) {
-      if (!error && response.statusCode == 200) {
-        let $ = cheerio.load(html);
-        let tableBody = $('.standard-table tbody');
-        tableBody.each((index, tableRow) => {
-          console.log(index);
-          if (index % 2 == 0) {
-            console.log(tableRow.children[1].children[0]);
-          }
-        });
-      }
-    });
   } else if (args[0] === 'search') {
     // checks if it has a search query
     if (!args[1])
