@@ -8,6 +8,9 @@ const config = {
     // Bot Support, level 8 by default. Array of user ID strings
     "support": [],
 
+    //Admin channel ID to report issues
+    "issueTracker": "532225061927518218",
+
     // Confidential Tokens - Usage Eg: client.tokens.bottoken
     "tokens": require("./tokens.json"),
 
