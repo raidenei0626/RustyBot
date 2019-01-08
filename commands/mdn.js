@@ -5,22 +5,21 @@ const Turndown = require('turndown');
 // init  && config
 const TD = new Turndown();
 fetch.promise = Promise;
-const baseURL =
-  'https://developer.mozilla.org/en-US/search.json/?topic=javascript,html,css&q=';
 const baseUrl = 'https://developer.mozilla.org/en-US/search.json/';
-const arrRandomQuery = [
-  'width',
-  'height',
-  'split()',
-  'indexOf()',
-  'width',
-  'height',
-  'split()',
-  'indexOf()',
-  'length',
-  'Object.hasOwnProperty()'
+const mdnTopics = [
+  {
+    name: 'html',
+    pages: 41
+  },
+  {
+    name: 'css',
+    pages: 117
+  },
+  {
+    name: 'js',
+    pages: 127
+  }
 ];
-const mdnTopics = ['html', 'js', 'css'];
 
 TD.addRule('mark', {
   filter: ['mark'],
@@ -49,26 +48,27 @@ exports.run = (client, message, args) => {
   // eslint-disable-line no-unused-vars
 
   if (args[0] === 'random') {
-    let randomQuery = arrRandomQuery[(Math.random() * 10).toFixed(0)];
-    let randomTopic = mdnTopics[(Math.random() * mdnTopics.length).toFixed(0)];
-    // fetch(baseURL + randomQuery)
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     result = res.documents[0];
-    //     fields = [
-    //       ['Docs', result.url || 'NA', true],
-    //       ['Tags', result.tags.join(' · ') || 'NA', true]
-    //     ];
+    let randomTopic = mdnTopics[Math.floor(Math.random() * mdnTopics.length)];
+    let randomPage = Math.ceil(Math.random() * randomTopic.pages);
+    fetch(`${baseUrl}?topic=${randomTopic.name}&page=${randomPage}`)
+      .then(res => res.json())
+      .then(res => {
+        documents = res.documents;
+        result = documents[Math.floor(Math.random() * documents.length)];
+        fields = [
+          ['Docs', result.url || 'NA', true],
+          ['Tags', result.tags.join(' · ') || 'NA', true]
+        ];
 
-    //     return client.sendembed({
-    //       method: message.channel,
-    //       title: 'Result For ' + result.title,
-    //       thumb: client.user.avatarURL,
-    //       desc: TD.turndown(result.excerpt) || 'NA',
-    //       fields: fields,
-    //       color: '#d30f65'
-    //     });
-    //   });
+        return client.sendembed({
+          method: message.channel,
+          title: 'Result For ' + result.title,
+          thumb: client.user.avatarURL,
+          desc: TD.turndown(result.excerpt) || 'NA',
+          fields: fields,
+          color: '#d30f65'
+        });
+      });
   } else if (args[0] === 'search') {
     // checks if it has a search query
     if (!args[1])
