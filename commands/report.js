@@ -13,8 +13,9 @@ exports.help = {
 }
 
 exports.run = (client, message, args) => {
-  let author = message.author
-  let issue = args.join(' ');
-  if(client.channels.has(client.settings.issueTracker)) client.channels.get(client.settings.issueTracker).send(author + ' reported an issue: ' + issue)
-  
+  if(client.channels.has(client.settings.issueTracker)) {
+    client.channels.get(client.settings.issueTracker).send(message.author + ' reported an issue: ' + args.join(' '))
+    message.reply('Your issue has been successfully reported!')
+    message.delete()
+  }
 }
