@@ -18,6 +18,10 @@ const mdnTopics = [
   {
     name: 'js',
     pages: 127
+  },
+  {
+    name: 'api',
+    pages: 594
   }
 ];
 
@@ -92,7 +96,7 @@ exports.run = (client, message, args) => {
  */
 const searchMDNDocs = (query, client, message) => {
   let result, fields;
-  fetch(baseURL + createSearchQuery(query))
+  fetch(baseUrl + '?topic=javascript,html,css&q=' + createSearchQuery(query))
     .then(res => res.json())
     .then(res => {
       // if no data from MDN
@@ -132,3 +136,28 @@ const createSearchQuery = argArr => {
   argArr.shift();
   return argArr.join(' ');
 };
+
+// [
+//   'api',
+//   'addons',
+//   'css',
+//   'canvas',
+//   'firefox',
+//   'firefox-fs',
+//   'games',
+//   'html',
+//   'http',
+//   'js',
+//   'marketplace',
+//   'mathml',
+//   'mobile',
+//   'apps',
+//   'svg',
+//   'webdev',
+//   'standards',
+//   'webext',
+//   'webgl',
+//   'docs',
+//   'xpcom',
+//   'xui'
+// ];
