@@ -26,7 +26,7 @@ module.exports = async (client, reaction, user) => {
 
 const flagMessage = (client, reaction, user) => {
     console.log(reaction.users.map(g => g).join("\n"))
-    let flagChannel = `528252055404412939`;
+    let flagChannel = `532232486412091402`;
     const management = reaction.message.guild.roles.find(role => role.name === "Admin")
     let content = (reaction.message.content.length === 0 ? "No message content" : reaction.message.content);
     let attachments = (reaction.message.attachments.array()[0] ? reaction.message.attachments.array()[0].url : undefined);
@@ -46,7 +46,7 @@ const flagMessage = (client, reaction, user) => {
                 [":warning: Flag Count", reaction.count, true],
                 [":id: Message ID", reaction.message.id, true],
                 [":pencil: Channel", reaction.message.channel.name, true],
-                [":clock: Timestamp", reaction.message.createdTimestamp, true],
+                [":clock: Timestamp", new Date(reaction.message.createdTimestamp).toUTCString(), true],
                 ["Reporter, ", user.username,true]
             ],
             image: attachments
